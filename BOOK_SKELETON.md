@@ -102,4 +102,5 @@ Worked case studies and rubrics.
 | 6 Search and Planning | ✅ v1 | ≈9,000 | 31 | 16 |
 | 7 Reflection, Critique and Self-Correction | ✅ v1 | ≈9,000 | 31 | 17 |
 | 8 Tool Use and Function Calling | ✅ v1 | ≈9,000 | 31 | 16 |
-| 9–22 | planned | | | |
+| 9 Retrieval and Knowledge | ✅ v1 | ≈8,900 | 31 | 16 |
+| 10–22 | planned | | | |

@@ -17,7 +17,7 @@
     { id: 'ch06', n: 6, part: 'II', title: 'Search and Planning', sub: 'Tree of Thoughts, best-of-n, MCTS and LATS, plan-and-execute, classical planners', file: 'chapters/ch06.html', ready: true },
     { id: 'ch07', n: 7, part: 'II', title: 'Reflection, Critique and Self-Correction', sub: 'Self-Refine, Reflexion, CRITIC, verifiers, and when self-correction fails', file: 'chapters/ch07.html', ready: true },
     { id: 'ch08', n: 8, part: 'III', title: 'Tool Use and Function Calling', sub: 'Toolformer, JSON schemas, constrained decoding, parallel calls, designing tools for models', file: 'chapters/ch08.html', ready: true },
-    { id: 'ch09', n: 9, part: 'III', title: 'Retrieval and Knowledge', sub: 'Embeddings, BM25, dense retrieval, reranking, RAG, agentic and graph retrieval', file: 'chapters/ch09.html', ready: false },
+    { id: 'ch09', n: 9, part: 'III', title: 'Retrieval and Knowledge', sub: 'Embeddings, BM25, dense retrieval, reranking, RAG, agentic and graph retrieval', file: 'chapters/ch09.html', ready: true },
     { id: 'ch10', n: 10, part: 'III', title: 'Code as Action', sub: 'CodeAct, sandboxes, SWE-agent, coding agents and SWE-bench', file: 'chapters/ch10.html', ready: false },
     { id: 'ch11', n: 11, part: 'III', title: 'Computer Use and Web Agents', sub: 'Grounding, screenshots vs accessibility trees, WebArena, OSWorld', file: 'chapters/ch11.html', ready: false },
     { id: 'ch12', n: 12, part: 'III', title: 'Protocols and Interoperability', sub: 'The Model Context Protocol, agent-to-agent protocols, authorisation', file: 'chapters/ch12.html', ready: false },

@@ -73,6 +73,11 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(e(\cdot)\), \(d_e\) | embedding map and embedding dimension |
 | \(\operatorname{sim}(u,v)\) | similarity, usually cosine \(u^\top v/(\lVert u\rVert\lVert v\rVert)\) |
 | \(K\) | number of retrieved items (top-\(K\)) |
+| \(N_{\mathcal D}\), \(\mathrm{tf}(u,d)\), \(\mathrm{df}(u)\) | collection size; count of term \(u\) in \(d\); documents containing \(u\) (Ch. 9) |
+| \(k_1\), \(b_{\text{BM}}\) | BM25 term-saturation and length-normalisation parameters (Ch. 9) |
+| \(T_e\), \(\mathcal L_{\text{con}}\) | contrastive temperature and loss for embeddings (Ch. 9) |
+| \(k_{\text{rrf}}\) | reciprocal-rank-fusion constant (Ch. 9) |
+| \(\zeta\) | score separation of a relevant item from distractors, in standard deviations (Ch. 9) |
 
 ## Cost and latency
 | Symbol | Meaning |
