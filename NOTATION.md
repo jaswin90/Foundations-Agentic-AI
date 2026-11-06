@@ -58,6 +58,8 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(U\), \(c\), \(F\) | value of success; cost of one more step or attempt; cost of a failure (Ch. 2, 6) |
 | \(q_t\), \(\varphi\) | belief that the goal is achieved; rate of false success claims (Ch. 2) |
 | \(D\) | difficulty of a problem in reasoning tokens (Ch. 5) |
+| \(\mu,\nu\) | per-round probabilities that revision fixes a wrong answer / breaks a right one (Ch. 7) |
+| \(a_k\), \(a^*\) | accuracy after \(k\) revision rounds; its fixed point \(\mu/(\mu+\nu)\) (Ch. 7) |
 | \(B\) | reasoning budget in tokens (Ch. 5) |
 
 ## Retrieval and memory
