@@ -106,4 +106,5 @@ Worked case studies and rubrics.
 | 10 Code as Action | ✅ v1 | ≈9,000 | 31 | 18 |
 | 11 Computer Use and Web Agents | ✅ v1 | ≈8,900 | 31 | 18 |
 | 12 Protocols and Interoperability | ✅ v1 | ≈8,600 | 31 | 17 |
-| 13–22 | planned | | | |
+| 13 Memory Architectures | ✅ v1 | ≈8,900 | 31 | 18 |
+| 14–22 | planned | | | |
