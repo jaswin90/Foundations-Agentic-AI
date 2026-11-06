@@ -61,6 +61,9 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(b_{\text{prop}}\), \(\Lambda\) | proposals per node and depth of a search tree (Ch. 6) |
 | \(\hat Q(s,a)\), \(N(s)\), \(N(s,a)\), \(c_{\text{uct}}\) | MCTS value estimate, visit counts and exploration constant (Ch. 6) |
 | \(r\), \(\delta\) | probability an error is detected; extra steps to recover (Ch. 2) |
+| \(\epsilon_f\) | per-step rate of fatal (undetected) errors (Ch. 14) |
+| \(\Lambda\) (Ch. 14), \(p_m\), \(r_m\) | steps per milestone; milestone success probability; probability a failed milestone is detected |
+| \(C_{\text{ck}}\), \(M_{\text{int}}\), \(\tau_c\), \(\Omega\) | checkpoint cost; mean time between interruptions; checkpoint interval; overhead fraction (Ch. 14) |
 | \(U\), \(c\), \(F\) | value of success; cost of one more step or attempt; cost of a failure (Ch. 2, 6) |
 | \(q_t\), \(\varphi\) | belief that the goal is achieved; rate of false success claims (Ch. 2) |
 | \(D\) | difficulty of a problem in reasoning tokens (Ch. 5) |
