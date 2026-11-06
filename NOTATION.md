@@ -36,6 +36,9 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(\beta\) | KL-regularisation coefficient (RLHF, DPO) |
 | \(\sigma\) | logistic function \(\sigma(u)=1/(1+e^{-u})\) |
 | \(\psi\) | latent task or concept inferred in context (Ch. 3) |
+| \(\xi\) | Toolformer filtering threshold on loss reduction (Ch. 8) |
+| \(\omega\) | logit margin of the correct choice over each plausible alternative (Ch. 8) |
+| \(N\) (Ch. 8) | number of plausible tools in a selection; elsewhere, parameters |
 | \(Z(x)\) | partition function of the KL-regularised optimum (Ch. 3); distinct from the observation kernel \(Z(o\mid s)\) by its argument |
 
 ## Reliability, search and evaluation
@@ -76,8 +79,12 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 |---|---|
 | \(\kappa_{\text{in}}, \kappa_{\text{out}}, \kappa_{\text{cache}}\) | price per token of input, output and cached input (quoted per million tokens) |
 | \(C\) | cost of a call, episode or workload in dollars |
+| \(C_{\text{err}}\), \(C_{\text{appr}}\), \(p_{\text{catch}}\) | cost of a wrong action; cost of an approval; probability a reviewer catches a wrong action (Ch. 8) |
 | \(\lambda\) | arrival rate of requests or tasks |
 | \(\ell\) | latency of a call or an episode; \(\ell_{\text{tool}}\) of a tool call |
+| \(\ell_{\text{model}}\), \(\Delta\ell\) | time of one model step; extra decode time per additional parallel call (Ch. 8) |
+| \(\rho_{\text{tool}}\), \(n_r\) | per-attempt success probability of a tool call; maximum attempts (Ch. 8) |
+| \(\eta\), \(w\), \(h\) | cache read price and write price relative to \(\kappa_{\text{in}}\); cache hit rate (Ch. 4) |
 | \(v_{\text{pre}}, v_{\text{dec}}\) | prefill and decode speeds in tokens per second |
 
 ## Reference values (illustrative, used for arithmetic)

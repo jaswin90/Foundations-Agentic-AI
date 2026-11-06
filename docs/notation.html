@@ -51,6 +51,9 @@
 <tr><td>\(\beta\)</td><td>KL-regularisation coefficient (RLHF, DPO)</td></tr>
 <tr><td>\(\sigma\)</td><td>logistic function \(\sigma(u)=1/(1+e^{-u})\)</td></tr>
 <tr><td>\(\psi\)</td><td>latent task or concept inferred in context (Ch. 3)</td></tr>
+<tr><td>\(\xi\)</td><td>Toolformer filtering threshold on loss reduction (Ch. 8)</td></tr>
+<tr><td>\(\omega\)</td><td>logit margin of the correct choice over each plausible alternative (Ch. 8)</td></tr>
+<tr><td>\(N\) (Ch. 8)</td><td>number of plausible tools in a selection; elsewhere, parameters</td></tr>
 <tr><td>\(Z(x)\)</td><td>partition function of the KL-regularised optimum (Ch. 3); distinct from the observation kernel \(Z(o\mid s)\) by its argument</td></tr>
 </tbody></table></div>
 <h2>Reliability, search and evaluation</h2>
@@ -88,8 +91,12 @@
 <div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
 <tr><td>\(\kappa_{\text{in}}, \kappa_{\text{out}}, \kappa_{\text{cache}}\)</td><td>price per token of input, output and cached input (quoted per million tokens)</td></tr>
 <tr><td>\(C\)</td><td>cost of a call, episode or workload in dollars</td></tr>
+<tr><td>\(C_{\text{err}}\), \(C_{\text{appr}}\), \(p_{\text{catch}}\)</td><td>cost of a wrong action; cost of an approval; probability a reviewer catches a wrong action (Ch. 8)</td></tr>
 <tr><td>\(\lambda\)</td><td>arrival rate of requests or tasks</td></tr>
 <tr><td>\(\ell\)</td><td>latency of a call or an episode; \(\ell_{\text{tool}}\) of a tool call</td></tr>
+<tr><td>\(\ell_{\text{model}}\), \(\Delta\ell\)</td><td>time of one model step; extra decode time per additional parallel call (Ch. 8)</td></tr>
+<tr><td>\(\rho_{\text{tool}}\), \(n_r\)</td><td>per-attempt success probability of a tool call; maximum attempts (Ch. 8)</td></tr>
+<tr><td>\(\eta\), \(w\), \(h\)</td><td>cache read price and write price relative to \(\kappa_{\text{in}}\); cache hit rate (Ch. 4)</td></tr>
 <tr><td>\(v_{\text{pre}}, v_{\text{dec}}\)</td><td>prefill and decode speeds in tokens per second</td></tr>
 </tbody></table></div>
 <h2>Reference values (illustrative, used for arithmetic)</h2>
