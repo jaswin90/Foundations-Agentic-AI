@@ -50,6 +50,9 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | pass@\(k\) | probability at least one of \(k\) attempts succeeds |
 | pass^\(k\) | probability all \(k\) independent attempts succeed |
 | \(m\) | number of tasks in an evaluation set |
+| \(M\), \(N\) (Ch. 12) | numbers of agent applications and of systems to integrate |
+| \(q\) (Ch. 12) | probability a third-party server is malicious; elsewhere \(q\) is a query |
+| \(\mathcal P_U\), \(\mathcal P_\tau\) | permissions of principal \(U\); permissions authorised by credential \(\tau\) (Ch. 12) |
 | \(\hat p\) | estimated success rate on \(m\) tasks |
 | \(b\) | branching factor of a search tree |
 | \(\epsilon\) | error rate (of a verifier, judge or step) |
