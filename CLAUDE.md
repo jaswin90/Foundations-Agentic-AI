@@ -31,7 +31,7 @@ This repository is a **book**, published as a static website from `docs/` (GitHu
 - Learning objectives; opening motivation; numbered sections; at least 4 inline SVG diagrams and 2 data charts where the topic allows; at least 2 worked examples (`div.box.example`) and 2 drills (`details.drill`); "Looking ahead"; summary.
 - **MCQs:** 30 or more (`div.mcq` with `data-id` like `ch03-mcq-07`, `data-topic` naming the section such as "§3.5 Sampling", options in `ol.opts`, correct options marked `data-correct`, explanation in `.explain`).
 - **Interview questions:** 15 or more (`details.qa` with `data-id`, a level pill `warm|core|deep|design`, model answer in `.answer`).
-- **References:** primary sources with arXiv links at the end, cited inline with `<span class="cite">`. Add key sources to `docs/references.html`.
+- **References:** primary sources with arXiv links at the end, cited inline with `<span class="cite">`. Then run `python3 tools/build_references.py` to rebuild `docs/references.html`.
 - **Length:** 9,000–14,000 words including questions.
 
 ## 5. Technical conventions

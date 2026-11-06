@@ -16,5 +16,5 @@ Companion book: [Introduction to LLM Engineering](https://jaswin90.github.io/LLM
 | `docs/assets/js/book.js` | Reader engine: TOC, theme, MCQ and Q&A components, progress store |
 | `docs/assets/js/auth.js` | Accounts (email/password, Google) and Firestore sync |
 | `docs/assets/js/charts.js` | Dependency-free SVG chart renderer |
-| `tools/` | `build_notation.py` (regenerates the notation page), `check_pages.js` (Playwright checks) |
+| `tools/` | `build_notation.py` (notation page), `build_references.py` (bibliography from chapter reference lists), `check_pages.js` (Playwright checks) |
 | `.github/workflows/pages.yml` | Deploys `docs/` to GitHub Pages |
