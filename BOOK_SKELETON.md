@@ -97,4 +97,5 @@ Worked case studies and rubrics.
 | 1 From Cybernetics to Language Agents | ✅ v1 | ≈12,500 | 32 | 16 |
 | 2 Agents as Decision Processes | ✅ v1 | ≈9,300 | 31 | 16 |
 | 3 The Language Model Inside the Agent | ✅ v1 | ≈9,000 | 31 | 16 |
-| 4–22 | planned | | | |
+| 4 Context Engineering | ✅ v1 | ≈10,500 | 31 | 16 |
+| 5–22 | planned | | | |
