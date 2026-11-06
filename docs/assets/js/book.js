@@ -19,7 +19,7 @@
     { id: 'ch08', n: 8, part: 'III', title: 'Tool Use and Function Calling', sub: 'Toolformer, JSON schemas, constrained decoding, parallel calls, designing tools for models', file: 'chapters/ch08.html', ready: true },
     { id: 'ch09', n: 9, part: 'III', title: 'Retrieval and Knowledge', sub: 'Embeddings, BM25, dense retrieval, reranking, RAG, agentic and graph retrieval', file: 'chapters/ch09.html', ready: true },
     { id: 'ch10', n: 10, part: 'III', title: 'Code as Action', sub: 'CodeAct, sandboxes, SWE-agent, coding agents and SWE-bench', file: 'chapters/ch10.html', ready: true },
-    { id: 'ch11', n: 11, part: 'III', title: 'Computer Use and Web Agents', sub: 'Grounding, screenshots vs accessibility trees, WebArena, OSWorld', file: 'chapters/ch11.html', ready: false },
+    { id: 'ch11', n: 11, part: 'III', title: 'Computer Use and Web Agents', sub: 'Grounding, screenshots vs accessibility trees, WebArena, OSWorld', file: 'chapters/ch11.html', ready: true },
     { id: 'ch12', n: 12, part: 'III', title: 'Protocols and Interoperability', sub: 'The Model Context Protocol, agent-to-agent protocols, authorisation', file: 'chapters/ch12.html', ready: false },
     { id: 'ch13', n: 13, part: 'IV', title: 'Memory Architectures', sub: 'Working, episodic, semantic and procedural memory; MemGPT; generative agents', file: 'chapters/ch13.html', ready: false },
     { id: 'ch14', n: 14, part: 'IV', title: 'Long-Horizon Agents', sub: 'Compaction, sub-agents, checkpoints, and tasks that last hours', file: 'chapters/ch14.html', ready: false },

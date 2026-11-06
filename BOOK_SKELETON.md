@@ -104,4 +104,5 @@ Worked case studies and rubrics.
 | 8 Tool Use and Function Calling | ✅ v1 | ≈9,000 | 31 | 16 |
 | 9 Retrieval and Knowledge | ✅ v1 | ≈8,900 | 31 | 16 |
 | 10 Code as Action | ✅ v1 | ≈9,000 | 31 | 18 |
-| 11–22 | planned | | | |
+| 11 Computer Use and Web Agents | ✅ v1 | ≈8,900 | 31 | 18 |
+| 12–22 | planned | | | |
