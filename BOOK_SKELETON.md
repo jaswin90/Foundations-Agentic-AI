@@ -95,4 +95,5 @@ Worked case studies and rubrics.
 | Chapter | Status | Words | MCQs | QAs |
 |---|---|---|---|---|
 | 1 From Cybernetics to Language Agents | ✅ v1 | ≈12,500 | 32 | 16 |
-| 2–22 | planned | | | |
+| 2 Agents as Decision Processes | ✅ v1 | ≈9,300 | 31 | 16 |
+| 3–22 | planned | | | |
