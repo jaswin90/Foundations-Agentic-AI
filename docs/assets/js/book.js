@@ -13,7 +13,7 @@
     { id: 'ch02', n: 2, part: 'I', title: 'Agents as Decision Processes', sub: 'POMDPs, the LLM as a policy, context as belief state, compounding error and the reliability arithmetic', file: 'chapters/ch02.html', ready: true },
     { id: 'ch03', n: 3, part: 'I', title: 'The Language Model Inside the Agent', sub: 'Next-token prediction, in-context learning, instruction tuning, sampling, and what a model call costs', file: 'chapters/ch03.html', ready: true },
     { id: 'ch04', n: 4, part: 'I', title: 'Context Engineering', sub: 'System prompts, few-shot examples, structured output, the context window as a budget, prompt caching', file: 'chapters/ch04.html', ready: true },
-    { id: 'ch05', n: 5, part: 'II', title: 'Chain of Thought and Test-Time Reasoning', sub: 'CoT, self-consistency, reasoning models, and the scaling of test-time compute', file: 'chapters/ch05.html', ready: false },
+    { id: 'ch05', n: 5, part: 'II', title: 'Chain of Thought and Test-Time Reasoning', sub: 'CoT, self-consistency, reasoning models, and the scaling of test-time compute', file: 'chapters/ch05.html', ready: true },
     { id: 'ch06', n: 6, part: 'II', title: 'Search and Planning', sub: 'Tree of Thoughts, best-of-n, MCTS and LATS, plan-and-execute, classical planners', file: 'chapters/ch06.html', ready: false },
     { id: 'ch07', n: 7, part: 'II', title: 'Reflection, Critique and Self-Correction', sub: 'Self-Refine, Reflexion, CRITIC, verifiers, and when self-correction fails', file: 'chapters/ch07.html', ready: false },
     { id: 'ch08', n: 8, part: 'III', title: 'Tool Use and Function Calling', sub: 'Toolformer, JSON schemas, constrained decoding, parallel calls, designing tools for models', file: 'chapters/ch08.html', ready: false },

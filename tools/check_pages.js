@@ -20,7 +20,7 @@ const { chromium } = require('playwright');
         figOutside: Array.from(document.querySelectorAll('figure')).filter(f => !f.closest('article')).length,
         mcq: document.querySelectorAll('.mcq').length, qa: document.querySelectorAll('details.qa').length,
         drills: document.querySelectorAll('details.drill').length, examples: document.querySelectorAll('.box.example').length,
-        words: (document.querySelector('article') || document.body).innerText.split(/\s+/).length,
+        words: (() => { const a = (document.querySelector('article') || document.body).cloneNode(true); a.querySelectorAll('svg, script, .chart').forEach(e => e.remove()); return a.textContent.split(/\s+/).filter(Boolean).length; })(),
         dupIds: (() => { const s = new Set(), d = []; document.querySelectorAll('[id]').forEach(e => { if (s.has(e.id)) d.push(e.id); s.add(e.id); }); return d; })(),
         brokenRefs: Array.from(document.querySelectorAll('a[href^="#"]')).map(a => a.getAttribute('href').slice(1)).filter(id => id && !document.getElementById(id))
       }));

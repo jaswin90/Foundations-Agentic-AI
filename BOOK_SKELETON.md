@@ -98,4 +98,5 @@ Worked case studies and rubrics.
 | 2 Agents as Decision Processes | ✅ v1 | ≈9,300 | 31 | 16 |
 | 3 The Language Model Inside the Agent | ✅ v1 | ≈9,000 | 31 | 16 |
 | 4 Context Engineering | ✅ v1 | ≈10,500 | 31 | 16 |
-| 5–22 | planned | | | |
+| 5 Chain of Thought and Test-Time Reasoning | ✅ v1 | ≈10,000 | 31 | 16 |
+| 6–22 | planned | | | |
