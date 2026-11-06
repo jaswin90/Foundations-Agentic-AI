@@ -99,4 +99,5 @@ Worked case studies and rubrics.
 | 3 The Language Model Inside the Agent | ✅ v1 | ≈9,000 | 31 | 16 |
 | 4 Context Engineering | ✅ v1 | ≈10,500 | 31 | 16 |
 | 5 Chain of Thought and Test-Time Reasoning | ✅ v1 | ≈10,000 | 31 | 16 |
-| 6–22 | planned | | | |
+| 6 Search and Planning | ✅ v1 | ≈9,000 | 31 | 16 |
+| 7–22 | planned | | | |

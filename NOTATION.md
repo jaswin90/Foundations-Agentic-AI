@@ -50,6 +50,15 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(\hat p\) | estimated success rate on \(m\) tasks |
 | \(b\) | branching factor of a search tree |
 | \(\epsilon\) | error rate (of a verifier, judge or step) |
+| \(\epsilon_-,\epsilon_+\) | a verifier's false-negative and false-positive rates (Ch. 6) |
+| \(A(n)\) | accuracy of best-of-\(n\) selection (Ch. 6) |
+| \(b_{\text{prop}}\), \(\Lambda\) | proposals per node and depth of a search tree (Ch. 6) |
+| \(\hat Q(s,a)\), \(N(s)\), \(N(s,a)\), \(c_{\text{uct}}\) | MCTS value estimate, visit counts and exploration constant (Ch. 6) |
+| \(r\), \(\delta\) | probability an error is detected; extra steps to recover (Ch. 2) |
+| \(U\), \(c\), \(F\) | value of success; cost of one more step or attempt; cost of a failure (Ch. 2, 6) |
+| \(q_t\), \(\varphi\) | belief that the goal is achieved; rate of false success claims (Ch. 2) |
+| \(D\) | difficulty of a problem in reasoning tokens (Ch. 5) |
+| \(B\) | reasoning budget in tokens (Ch. 5) |
 
 ## Retrieval and memory
 | Symbol | Meaning |
