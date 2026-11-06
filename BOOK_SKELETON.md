@@ -103,4 +103,5 @@ Worked case studies and rubrics.
 | 7 Reflection, Critique and Self-Correction | ✅ v1 | ≈9,000 | 31 | 17 |
 | 8 Tool Use and Function Calling | ✅ v1 | ≈9,000 | 31 | 16 |
 | 9 Retrieval and Knowledge | ✅ v1 | ≈8,900 | 31 | 16 |
-| 10–22 | planned | | | |
+| 10 Code as Action | ✅ v1 | ≈9,000 | 31 | 18 |
+| 11–22 | planned | | | |
