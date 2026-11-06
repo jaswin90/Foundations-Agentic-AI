@@ -43,7 +43,7 @@ This repository is a **book**, published as a static website from `docs/` (GitHu
 - Progress for this book is stored under the `agenticAI` field of the shared Firebase document `users/{uid}`; never write outside it.
 
 ## 6. Before pushing
-1. Serve `docs/` locally and run `tools/check_pages.py` (Playwright): no page errors, no `.katex-error`, no horizontal overflow at 390 px, all charts rendered, every figure inside `article`. Look at screenshots of new figures. Keep screenshots in the scratchpad, never in the repo.
+1. Serve `docs/` locally and run `tools/check_pages.js` (Playwright): no page errors, no `.katex-error`, no horizontal overflow at 390 px, all charts rendered, every figure inside `article`. Look at screenshots of new figures. Keep screenshots in the scratchpad, never in the repo.
 2. Recompute every quantitative claim from its formula before publishing.
 3. Update `BOOK_SKELETON.md` (status) and add a `REVIEW.md` entry for any editorial pass.
 4. Commit and push to the working branch. Site: https://jaswin90.github.io/Foundations-Agentic-AI/.
