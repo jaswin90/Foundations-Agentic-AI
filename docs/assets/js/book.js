@@ -11,7 +11,7 @@
   const CHAPTERS = [
     { id: 'ch01', n: 1, part: 'I', title: 'From Cybernetics to Language Agents', sub: 'Feedback, planning, reinforcement learning and LLMs: the history of agents as a chain of bottlenecks', file: 'chapters/ch01.html', ready: true },
     { id: 'ch02', n: 2, part: 'I', title: 'Agents as Decision Processes', sub: 'POMDPs, the LLM as a policy, context as belief state, compounding error and the reliability arithmetic', file: 'chapters/ch02.html', ready: true },
-    { id: 'ch03', n: 3, part: 'I', title: 'The Language Model Inside the Agent', sub: 'Next-token prediction, in-context learning, instruction tuning, sampling, and what a model call costs', file: 'chapters/ch03.html', ready: false },
+    { id: 'ch03', n: 3, part: 'I', title: 'The Language Model Inside the Agent', sub: 'Next-token prediction, in-context learning, instruction tuning, sampling, and what a model call costs', file: 'chapters/ch03.html', ready: true },
     { id: 'ch04', n: 4, part: 'I', title: 'Context Engineering', sub: 'System prompts, few-shot examples, structured output, the context window as a budget, prompt caching', file: 'chapters/ch04.html', ready: false },
     { id: 'ch05', n: 5, part: 'II', title: 'Chain of Thought and Test-Time Reasoning', sub: 'CoT, self-consistency, reasoning models, and the scaling of test-time compute', file: 'chapters/ch05.html', ready: false },
     { id: 'ch06', n: 6, part: 'II', title: 'Search and Planning', sub: 'Tree of Thoughts, best-of-n, MCTS and LATS, plan-and-execute, classical planners', file: 'chapters/ch06.html', ready: false },

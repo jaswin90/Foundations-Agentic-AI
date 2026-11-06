@@ -35,6 +35,8 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(r_\phi\) | learned reward model with parameters \(\phi\) |
 | \(\beta\) | KL-regularisation coefficient (RLHF, DPO) |
 | \(\sigma\) | logistic function \(\sigma(u)=1/(1+e^{-u})\) |
+| \(\psi\) | latent task or concept inferred in context (Ch. 3) |
+| \(Z(x)\) | partition function of the KL-regularised optimum (Ch. 3); distinct from the observation kernel \(Z(o\mid s)\) by its argument |
 
 ## Reliability, search and evaluation
 | Symbol | Meaning |
