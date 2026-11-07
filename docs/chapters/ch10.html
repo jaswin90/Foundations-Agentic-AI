@@ -81,8 +81,8 @@
 <div class="box example">
 <div class="box-title">Worked example — what the code action saves</div>
 <p>The support agent must find, among a customer's 20 bookings, those cancelled by the airline and total their refunds. Context: 12,000 tokens, growing by 300 tokens per tool step.</p>
-<p><b>JSON calls.</b> 40 steps (two calls per booking), each a model call reading the growing context and writing about 80 tokens. Input: \(40\times12{,}000+300\times\frac{40\times39}{2}=480{,}000+234{,}000=714{,}000\) tokens, mostly cached: about \$0.21 of cached reads, plus fresh tokens (the initial 12,000 and 300 per step, 24,000 in all) at \$0.072 and output \(3{,}200\times\$15/\text{M}=\$0.048\): about \$0.33. Time: \(40\times(80/60+0.3)\approx65\) s. Reliability at \(\epsilon=0.02\) per step: 0.45 error-free, plus the risk of an addition error.</p>
-<p><b>Code action.</b> One model call writing a 120-token program, one execution (20 look-ups and 20 quotes, about 2 s if the tools are fast), one call to read the result and reply. Cost: about \$0.01. Time: about 6 s. Reliability: dominated by the chance of a bug in the program, perhaps 5%, and most bugs raise an exception that the agent sees and fixes.</p>
+<p><b>JSON calls.</b> 40 steps (two calls per booking), each a model call reading the growing context and writing about 80 tokens. Input: \(40\times12{,}000+300\times\frac{40\times39}{2}=480{,}000+234{,}000=714{,}000\) tokens, mostly cached: about $0.21 of cached reads, plus fresh tokens (the initial 12,000 and 300 per step, 24,000 in all) at $0.072 and output \(3{,}200\times\$15/\text{M}=\$0.048\): about $0.33. Time: \(40\times(80/60+0.3)\approx65\) s. Reliability at \(\epsilon=0.02\) per step: 0.45 error-free, plus the risk of an addition error.</p>
+<p><b>Code action.</b> One model call writing a 120-token program, one execution (20 look-ups and 20 quotes, about 2 s if the tools are fast), one call to read the result and reply. Cost: about $0.01. Time: about 6 s. Reliability: dominated by the chance of a bug in the program, perhaps 5%, and most bugs raise an exception that the agent sees and fixes.</p>
 <p><b>Caveat.</b> The program issues no refunds. Writes still go through the guarded, structured tools of §8.9, one approval per refund if the policy requires it.</p>
 </div>
 
@@ -141,7 +141,7 @@
 
 <div class="box example">
 <div class="box-title">Worked example — pipeline or agent, by cost per resolved issue</div>
-<p>On a team's internal benchmark of 200 issues, a fixed pipeline resolves 38% at \$0.40 per attempt; an agent resolves 55% at \$1.60 per attempt. An unresolved issue costs an engineer about \$60 of time.</p>
+<p>On a team's internal benchmark of 200 issues, a fixed pipeline resolves 38% at $0.40 per attempt; an agent resolves 55% at $1.60 per attempt. An unresolved issue costs an engineer about $60 of time.</p>
 <p><b>Expected cost per issue.</b> Pipeline: \(0.40+0.62\times60=\$37.60\). Agent: \(1.60+0.45\times60=\$28.60\). Pipeline first, agent on the failures: if the agent resolves 40% of the issues the pipeline failed on (the harder ones), the expected cost is \(0.40+0.62\times1.60+0.62\times0.60\times60=0.40+0.99+22.32=\$23.71\).</p>
 <p><b>Lesson.</b> When failures are expensive, the more capable system wins despite its price; a cascade that tries the cheap system first and escalates does better still, as long as the cheap system's successes can be verified (here, by tests). This is the model cascade of §3.7 applied to whole systems.</p>
 </div>
@@ -160,14 +160,14 @@
   {"name":"search-and-replace block (5 lines + 6 context, twice)","color":"s1","points":[[50,264],[100,264],[200,264],[500,264],[1000,264],[2000,264]]}
  ]}
 </script>
-<figcaption><b>Figure 10.4 — Edit format sets the cost of a change.</b> A whole-file rewrite grows with the file; a search-and-replace edit depends only on the size of the change. For a 2,000-line file the rewrite writes 24,000 tokens, about \$0.36 and nearly seven minutes of decoding at 60 tokens per second, against 264 tokens and under five seconds.</figcaption></figure>
+<figcaption><b>Figure 10.4 — Edit format sets the cost of a change.</b> A whole-file rewrite grows with the file; a search-and-replace edit depends only on the size of the change. For a 2,000-line file the rewrite writes 24,000 tokens, about $0.36 and nearly seven minutes of decoding at 60 tokens per second, against 264 tokens and under five seconds.</figcaption></figure>
 
 <p>Figure 10.4 explains why capable coding agents use targeted edit formats for most changes and reserve whole-file writes for new or small files. The saving is not only money and time: a model asked to reproduce 2,000 lines verbatim will occasionally change one it was not asked to, a silent error that tests may not catch, while a search-and-replace edit can only change what it names. The edit tool should also check what it can: that the file still parses after the edit, that the search text matched exactly once, and that the change did not touch files the task forbids (such as test files, discussed in §10.8). Each check converts a silent failure into an instructive error, raising \(r\) in the language of §2.6.</p>
 
 <details class="drill">
 <summary>Drill 10.2 — the cost of rewriting</summary>
 <p>A coding episode makes 12 edits to files averaging 600 lines, changing about 6 lines each. Compare the output tokens, cost and decode time of whole-file rewrites and search-and-replace blocks (12 tokens per line, 6 lines of context per block, search and replace each written once).</p>
-<p>Rewrites: \(12\times600\times12=86{,}400\) tokens, \$1.30, \(86{,}400/60=1{,}440\) s (24 minutes). Blocks: each \((6+6)\times12\times2=288\) tokens, \(12\times288=3{,}456\) tokens, \$0.05, 58 s. The rewrite approach would also add 86,400 tokens to the context, re-read at every later step, unless the harness keeps only the diff.</p>
+<p>Rewrites: \(12\times600\times12=86{,}400\) tokens, $1.30, \(86{,}400/60=1{,}440\) s (24 minutes). Blocks: each \((6+6)\times12\times2=288\) tokens, \(12\times288=3{,}456\) tokens, $0.05, 58 s. The rewrite approach would also add 86,400 tokens to the context, re-read at every later step, unless the harness keeps only the diff.</p>
 </details>
 
 <h2 id="s10-5">10.5 Tests as the verifier</h2>
@@ -251,7 +251,7 @@
 
 <details class="drill">
 <summary>Drill 10.4 — amortising a tool</summary>
-<p>An agent must reconcile 300 invoices. By hand, each takes 6 tool-call steps at \$0.01 each with a 2% error rate per step. Alternatively, it spends \$0.80 writing and testing a reconciliation function, after which each invoice is one call at \$0.002, with a 0.5% failure rate (mostly exceptions it catches). Compare cost and expected number of incorrectly reconciled invoices.</p>
+<p>An agent must reconcile 300 invoices. By hand, each takes 6 tool-call steps at $0.01 each with a 2% error rate per step. Alternatively, it spends $0.80 writing and testing a reconciliation function, after which each invoice is one call at $0.002, with a 0.5% failure rate (mostly exceptions it catches). Compare cost and expected number of incorrectly reconciled invoices.</p>
 <p>By hand: \(300\times6\times\$0.01=\$18\); each invoice error-free with probability \(0.98^6=0.886\), so about 34 incorrect. With the tool: \(\$0.80+300\times\$0.002=\$1.40\); about 1.5 failures, most of them visible exceptions that can be retried or escalated. The one-off cost of building the tool pays for itself many times over and the error count falls by more than an order of magnitude, provided the tool itself is verified.</p>
 </details>
 

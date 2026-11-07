@@ -233,14 +233,14 @@
 <div class="box-title">Worked example — is a review step worth its cost?</div>
 <p>A support agent drafts replies that violate policy 6% of the time. Option A: an intrinsic "review your reply against the policy" pass, measured at \(\mu=0.3\), \(\nu=0.02\). Option B: a policy tool that checks the specific action proposed (refund amount, fee waiver) deterministically, plus the intrinsic pass only for wording, measured at \(\mu=0.8\), \(\nu=0.005\) on policy violations.</p>
 <p><b>Violation rate after one round.</b> A: \(0.06(1-0.3)+0.94\times0.02=0.042+0.0188=0.061\). No better than without review: the pass breaks almost as many good replies as it fixes bad ones. B: \(0.06\times0.2+0.94\times0.005=0.012+0.0047=0.0167\).</p>
-<p><b>Cost per reply.</b> A: one extra call on a 10k-token cached context with 200 output tokens, about \(\$0.003+\$0.003=\$0.006\). B: a tool call (negligible) plus the same review call, about \$0.006. Same cost, very different value.</p>
-<p><b>If a violation costs \$20</b> (an improper refund or a complaint), B saves \((0.06-0.0167)\times\$20=\$0.87\) per reply; A saves nothing.</p>
+<p><b>Cost per reply.</b> A: one extra call on a 10k-token cached context with 200 output tokens, about \(\$0.003+\$0.003=\$0.006\). B: a tool call (negligible) plus the same review call, about $0.006. Same cost, very different value.</p>
+<p><b>If a violation costs $20</b> (an improper refund or a complaint), B saves \((0.06-0.0167)\times\$20=\$0.87\) per reply; A saves nothing.</p>
 </div>
 
 <details class="drill">
 <summary>Drill 7.3 — how many rounds?</summary>
-<p>A revision loop with external feedback has \(\mu=0.4\), \(\nu=0.01\), and starts at \(a_0=0.7\). Each round costs \$0.01 and each remaining error costs \$1. How many rounds minimise expected cost?</p>
-<p>\(a^*=0.4/0.41=0.976\); \(a_k=0.976-0.276\times0.59^k\). Error rates: \(k=0\): 0.300; 1: 0.187; 2: 0.120; 3: 0.081; 4: 0.058; 5: 0.045. Each round's saving: 0.113, 0.067, 0.039, 0.023, 0.013 dollars, all above the \$0.01 cost, and the sixth round saves \$0.008, below it. Five rounds; in practice two or three capture most of the gain, and the per-round cost is often higher than this.</p>
+<p>A revision loop with external feedback has \(\mu=0.4\), \(\nu=0.01\), and starts at \(a_0=0.7\). Each round costs $0.01 and each remaining error costs $1. How many rounds minimise expected cost?</p>
+<p>\(a^*=0.4/0.41=0.976\); \(a_k=0.976-0.276\times0.59^k\). Error rates: \(k=0\): 0.300; 1: 0.187; 2: 0.120; 3: 0.081; 4: 0.058; 5: 0.045. Each round's saving: 0.113, 0.067, 0.039, 0.023, 0.013 dollars, all above the $0.01 cost, and the sixth round saves $0.008, below it. Five rounds; in practice two or three capture most of the gain, and the per-round cost is often higher than this.</p>
 </details>
 
 <details class="drill">

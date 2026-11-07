@@ -94,9 +94,9 @@
 
 <div class="box example">
 <div class="box-title">Worked example — best-of-n for the coding agent</div>
-<p>The coding agent resolves an issue on \(p=0.3\) of attempts at \$1.15 per attempt (§1.10). The repository has its own test suite, which the agent may run, but the hidden tests that define success are unavailable. The agent's own tests accept a correct patch 90% of the time and a wrong patch 20% of the time.</p>
+<p>The coding agent resolves an issue on \(p=0.3\) of attempts at $1.15 per attempt (§1.10). The repository has its own test suite, which the agent may run, but the hidden tests that define success are unavailable. The agent's own tests accept a correct patch 90% of the time and a wrong patch 20% of the time.</p>
 <p><b>Ceiling.</b> \(0.27/(0.27+0.7\times0.2)=0.27/0.41=0.66\).</p>
-<p><b>Cost.</b> Eight attempts (\$9.20) get close to the ceiling. Compared with one attempt: accuracy from 0.30 to about 0.64 for eight times the cost, \$14.40 per resolved issue against \$3.83 for single attempts (\$1.15 / 0.30) if failed attempts are free to retry later, or a large gain if each unresolved issue costs an engineer an hour.</p>
+<p><b>Cost.</b> Eight attempts ($9.20) get close to the ceiling. Compared with one attempt: accuracy from 0.30 to about 0.64 for eight times the cost, $14.40 per resolved issue against $3.83 for single attempts ($1.15 / 0.30) if failed attempts are free to retry later, or a large gain if each unresolved issue costs an engineer an hour.</p>
 <p><b>Improving the verifier.</b> If the agent first writes a test that reproduces the bug (it should fail before the fix and pass after), the false-positive rate of its checks might fall to 5%. The ceiling rises to \(0.27/(0.27+0.035)=0.885\). A better verifier is worth more than any number of extra samples.</p>
 </div>
 
@@ -217,9 +217,9 @@
 
 <div class="box example">
 <div class="box-title">Worked example — what plan-and-execute saves</div>
-<p>A ten-step support task. <b>ReAct with the frontier model:</b> each step reads a 10,000-token context (9,000 cached, 1,000 fresh) and writes 300 tokens. Per step: \(0.009\times\$0.30+0.001\times\$3+0.0003\times\$15=\$0.0027+\$0.003+\$0.0045=\$0.0102\); ten steps: \$0.102. Decode time: \(10\times300/60=50\) s.</p>
-<p><b>Plan-and-execute.</b> One frontier planning call reads 10,000 tokens (8,000 cached) and writes a 3,000-token reasoned plan: \(\$0.0024+\$0.006+\$0.045=\$0.053\). Ten executor steps on the small model, each reading 10,000 tokens (cached reads assumed at a tenth of its \$0.25 input price) and writing 200: about \$0.00075 each, \$0.0075 in all. Total \$0.061, 40% less. Decode time: \(3{,}000/60+10\times200/150=50+13=63\) s, slightly <em>more</em>, because the plan is long and written by the slow model.</p>
-<p><b>Replanning.</b> If an observation contradicts the plan in 30% of tasks, each costing one more planning call, the expected cost rises by \(0.3\times\$0.053=\$0.016\) to \$0.077, still a quarter cheaper.</p>
+<p>A ten-step support task. <b>ReAct with the frontier model:</b> each step reads a 10,000-token context (9,000 cached, 1,000 fresh) and writes 300 tokens. Per step: \(0.009\times\$0.30+0.001\times\$3+0.0003\times\$15=\$0.0027+\$0.003+\$0.0045=\$0.0102\); ten steps: $0.102. Decode time: \(10\times300/60=50\) s.</p>
+<p><b>Plan-and-execute.</b> One frontier planning call reads 10,000 tokens (8,000 cached) and writes a 3,000-token reasoned plan: \(\$0.0024+\$0.006+\$0.045=\$0.053\). Ten executor steps on the small model, each reading 10,000 tokens (cached reads assumed at a tenth of its $0.25 input price) and writing 200: about $0.00075 each, $0.0075 in all. Total $0.061, 40% less. Decode time: \(3{,}000/60+10\times200/150=50+13=63\) s, slightly <em>more</em>, because the plan is long and written by the slow model.</p>
+<p><b>Replanning.</b> If an observation contradicts the plan in 30% of tasks, each costing one more planning call, the expected cost rises by \(0.3\times\$0.053=\$0.016\) to $0.077, still a quarter cheaper.</p>
 <p><b>Lesson.</b> Plan-and-execute moves expensive judgement to one call and cheap execution to many, saving money; it does not save time unless the plan is short or execution is parallel. If surprises are frequent, replanning erodes the saving and a step-by-step loop may be better.</p>
 </div>
 
@@ -249,7 +249,7 @@
 <details class="drill">
 <summary>Drill 6.2 — the cost of a tree</summary>
 <p>A Tree-of-Thoughts search uses depth 3, beam width 5 and 5 proposals per state, with one proposal call and one evaluation call per candidate. Each call reads 3,000 cached tokens and writes 200. (a) How many calls and what cost? (b) Compare with a single chain of thought of 600 output tokens.</p>
-<p>(a) Per depth, \(5\times5=25\) candidates, each with two calls: 50 calls; over 3 depths, 150 calls. Each costs \(0.003\times\$0.30+0.0002\times\$15=\$0.0009+\$0.003=\$0.0039\): total \$0.585. (b) The chain: \(0.003\times\$0.30+0.0006\times\$15=\$0.0099\). The tree costs about 59 times as much, justified only if it turns failures into successes on problems that matter, as on the Game of 24.</p>
+<p>(a) Per depth, \(5\times5=25\) candidates, each with two calls: 50 calls; over 3 depths, 150 calls. Each costs \(0.003\times\$0.30+0.0002\times\$15=\$0.0009+\$0.003=\$0.0039\): total $0.585. (b) The chain: \(0.003\times\$0.30+0.0006\times\$15=\$0.0099\). The tree costs about 59 times as much, justified only if it turns failures into successes on problems that matter, as on the Game of 24.</p>
 </details>
 
 <h2 id="s6-7">6.7 When does search help an agent?</h2>
@@ -264,7 +264,7 @@
 <div class="box example">
 <div class="box-title">Worked example — planning a support conversation without search</div>
 <p>The support agent cannot search over actions: once it tells the customer "your flight is changed", it cannot try something else. A customer wants to move a trip with two connecting flights and a hotel booked through the airline.</p>
-<p><b>Plan in the head.</b> The agent first calls tools that only <em>read</em> (look up the booking, search alternative flights, check the hotel's cancellation terms), then writes a plan in its reasoning, considering two alternatives: change both flights to Friday morning (fare difference \$140, hotel night lost, \$95 non-refundable) or change only the second flight (fare difference \$60, a six-hour layover).</p>
+<p><b>Plan in the head.</b> The agent first calls tools that only <em>read</em> (look up the booking, search alternative flights, check the hotel's cancellation terms), then writes a plan in its reasoning, considering two alternatives: change both flights to Friday morning (fare difference $140, hotel night lost, $95 non-refundable) or change only the second flight (fare difference $60, a six-hour layover).</p>
 <p><b>Check before committing.</b> A fare-calculation tool confirms both numbers; a policy tool confirms both changes are allowed. The agent presents both options with their costs, and the customer chooses.</p>
 <p><b>Execute.</b> Only now does it call the tools that <em>write</em>, and it reads the booking back to verify.</p>
 <p><b>Structure.</b> All the search happened over plans, using read-only tools as a model of the environment; the irreversible actions were executed once, after a check and the customer's confirmation. Separating read tools from write tools is what makes this possible, a design principle Chapter 8 develops.</p>

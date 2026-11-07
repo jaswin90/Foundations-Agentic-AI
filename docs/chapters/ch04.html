@@ -108,7 +108,7 @@
   {"name":"cached (1.25× write once, 0.1× reads)","color":"s1","points":[[5,0.019],[10,0.039],[20,0.077],[50,0.193],[100,0.386]]}
  ]}
 </script>
-<figcaption><b>Figure 4.2 — Tool definitions are re-read at every step.</b> At 250 tokens per tool, 100 tools add 25,000 tokens to every call: \$3.00 per 40-step episode uncached, \$0.39 cached. The larger hidden cost is in selection accuracy, which tends to fall as the menu grows.</figcaption></figure>
+<figcaption><b>Figure 4.2 — Tool definitions are re-read at every step.</b> At 250 tokens per tool, 100 tools add 25,000 tokens to every call: $3.00 per 40-step episode uncached, $0.39 cached. The larger hidden cost is in selection accuracy, which tends to fall as the menu grows.</figcaption></figure>
 
 <p>Figure 4.2 shows that, with caching, tool definitions are affordable in money even in large numbers: under 40 cents an episode for a hundred tools. The more serious costs are the other two. A hundred tools take an eighth of a 200,000-token window before the task has even been stated, and a long menu of similar tools makes selection harder: the model must discriminate between <code>get_booking</code>, <code>lookup_reservation</code> and <code>fetch_trip</code>, and ambiguity among near-duplicates is a reliable source of errors. Evaluations of function calling consistently find accuracy declining as the number of available functions grows. Three remedies are standard. <em>Curate</em>: give each agent only the tools its task needs, and merge overlapping tools. <em>Namespace</em>: group related tools with consistent prefixes (<code>booking_get</code>, <code>booking_change</code>) so that the menu has visible structure. <em>Load on demand</em>: expose a small set of tools plus a way to search for and load others when needed, keeping the definitions of rarely used tools out of the context until they are relevant. Chapter 8 returns to tool design in depth.</p>
 
@@ -178,10 +178,10 @@
 
 <div class="box example">
 <div class="box-title">Worked example — the timestamp that cost four times as much</div>
-<p>The support agent of §2.8 has a 6,000-token fixed prefix and 12 turns per conversation, appending 400 tokens per turn. With caching working, a conversation costs about \$0.085 (§2.8). A developer adds "Current time: 14:03:27" to the first line of the system prompt so that the agent knows the time.</p>
+<p>The support agent of §2.8 has a 6,000-token fixed prefix and 12 turns per conversation, appending 400 tokens per turn. With caching working, a conversation costs about $0.085 (§2.8). A developer adds "Current time: 14:03:27" to the first line of the system prompt so that the agent knows the time.</p>
 <p><b>Effect.</b> The time changes on every call, so the first differing token is near position 10 and nothing after it is ever reused. Every call becomes a miss, and with a write premium every call pays \(1.25\kappa_{\text{in}}\) for its whole context.</p>
-<p><b>Cost.</b> Input tokens per conversation: 98,400 (§2.8). At \(1.25\times\$3\) per million: \$0.369, plus \$0.027 of output: <b>\$0.40</b>, nearly five times the cached cost and more than the \$0.32 of not caching at all.</p>
-<p><b>Fix.</b> Put the time, to the minute, in the latest user turn, or provide it through a tool. The prefix is restored and the cost returns to about \$0.085.</p>
+<p><b>Cost.</b> Input tokens per conversation: 98,400 (§2.8). At \(1.25\times\$3\) per million: $0.369, plus $0.027 of output: <b>$0.40</b>, nearly five times the cached cost and more than the $0.32 of not caching at all.</p>
+<p><b>Fix.</b> Put the time, to the minute, in the latest user turn, or provide it through a tool. The prefix is restored and the cost returns to about $0.085.</p>
 </div>
 
 <figure class="diagram" id="fig-4-5">
@@ -242,7 +242,7 @@
 <p>The coding agent's context starts at 8,000 tokens and grows by 2,500 per step (300 of output and 2,200 of observation) over 40 steps. Policy P: at every step, replace observations older than five steps with 200-token stubs, so that old steps cost 500 tokens.</p>
 <p><b>Input tokens under P.</b> For \(t\le6\), \(n_t=8{,}000+2{,}500(t-1)\), summing to 85,500. For \(t\ge7\), \(n_t=8{,}000+5\times2{,}500+500(t-6)\), and \(\sum_{t=7}^{40}n_t=34\times20{,}500+500\times\frac{34\times35}{2}=697{,}000+297{,}500=994{,}500\). Total: 1.08 million, against 2.27 million unpruned.</p>
 <p><b>But the cache.</b> Each step's pruning rewrites the observation that has just turned six steps old, about 13,000 tokens from the end (the new stub plus the five most recent steps), so each call can reuse only the part before the edit. About 13,000 tokens per call are fresh instead of 2,500: roughly 460,000 fresh tokens in all, with the remaining 620,000 cached. Cost: \(0.46\times\$3+0.62\times\$0.30+\$0.18\approx\$1.75\).</p>
-<p><b>Comparison.</b> Unpruned with caching: \$1.15 (§1.10). Pruning at every step raised the cost by half while halving the tokens. <b>Batch</b> instead: prune once every ten steps, so that the cache is broken four times rather than 34. The context stays near the pruned size, most calls hit the cache, and the cost falls below \$1.15, with the quality benefit of a shorter context.</p>
+<p><b>Comparison.</b> Unpruned with caching: $1.15 (§1.10). Pruning at every step raised the cost by half while halving the tokens. <b>Batch</b> instead: prune once every ten steps, so that the cache is broken four times rather than 34. The context stays near the pruned size, most calls hit the cache, and the cost falls below $1.15, with the quality benefit of a shorter context.</p>
 </div>
 
 <p>The example generalises to a design rule: edit history rarely and in large batches, at natural boundaries such as the completion of a sub-task, rather than continuously. This is how compaction is usually implemented in practice: when the context passes a threshold (say 70% of the window or a fixed token budget), a single summarisation replaces most of the history, the cache is rebuilt once, and the episode continues from a much smaller context. The threshold itself is a parameter to tune: too low and the agent loses information it needed, too high and it suffers context rot before the compaction comes.</p>
@@ -466,7 +466,7 @@
 <div class="mcq" data-id="ch04-mcq-28" data-topic="§4.8 Pruning vs caching">
 <p class="q">Why can pruning at every step cost more than not pruning?</p>
 <ol class="opts"><li>Stubs are long</li><li data-correct>Each edit invalidates the cache after the edited point, turning many cheap cached tokens into fresh ones</li><li>Pruning requires a model call</li><li>Pruned contexts are longer</li></ol>
-<div class="explain">In the worked example, per-step pruning cost \$1.75 against \$1.15 for unpruned with caching. Edit rarely, in batches.</div>
+<div class="explain">In the worked example, per-step pruning cost $1.75 against $1.15 for unpruned with caching. Edit rarely, in batches.</div>
 </div>
 
 <div class="mcq" data-id="ch04-mcq-29" data-topic="§4.8 Compaction">
@@ -543,7 +543,7 @@
 
 <details class="qa" data-id="ch04-qa-11">
 <summary><span class="lvl deep">Deep-dive</span> Analyse the interaction between history pruning and prompt caching, and design a policy that gets the benefits of both.</summary>
-<div class="answer"><p>Pruning reduces tokens and context rot, but editing position \(j\) invalidates cached states after \(j\), so continuous pruning near the end turns most of each call into fresh tokens. With per-step pruning in the worked example, fresh tokens rose from about 2,500 to 13,000 per call and cost rose from \$1.15 to \$1.75 despite halving total tokens. Better: batch pruning or compaction at thresholds (e.g. every 10 steps or at 50% of a budget), so the cache is rebuilt a few times per episode; prune far-back regions (whose invalidation costs only the tail anyway) together; keep a stable region immediately after the fixed prefix for compacted summaries so subsequent appends cache. Cost model: each rebuild costs roughly the context size at fresh (or write) price; choose the interval minimising rebuild cost plus cached-read cost plus a penalty for context length.</p></div>
+<div class="answer"><p>Pruning reduces tokens and context rot, but editing position \(j\) invalidates cached states after \(j\), so continuous pruning near the end turns most of each call into fresh tokens. With per-step pruning in the worked example, fresh tokens rose from about 2,500 to 13,000 per call and cost rose from $1.15 to $1.75 despite halving total tokens. Better: batch pruning or compaction at thresholds (e.g. every 10 steps or at 50% of a budget), so the cache is rebuilt a few times per episode; prune far-back regions (whose invalidation costs only the tail anyway) together; keep a stable region immediately after the fixed prefix for compacted summaries so subsequent appends cache. Cost model: each rebuild costs roughly the context size at fresh (or write) price; choose the interval minimising rebuild cost plus cached-read cost plus a penalty for context length.</p></div>
 </details>
 
 <details class="qa" data-id="ch04-qa-12">

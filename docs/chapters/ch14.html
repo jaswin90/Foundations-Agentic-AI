@@ -99,9 +99,9 @@
 <div class="box example">
 <div class="box-title">Worked example — how often to compact</div>
 <p>A migration agent's context has a 12,000-token fixed prefix, grows by 3,000 tokens per step, and is compacted to a 6,000-token summary (on top of the prefix) whenever it reaches a threshold \(n_c\). Each compaction is a model call that reads the whole context and writes the summary, and invalidates the cache, so the next call pays for the context fresh.</p>
-<p><b>Threshold 150,000.</b> Each cycle grows from 18,000 to 150,000 tokens: 44 steps. Average context about 84,000 tokens. Compaction cost per cycle: reading 150,000 tokens (\$0.045 cached) and writing 6,000 (\$0.09), plus one fresh rebuild of 18,000 (\$0.054): about \$0.19 per 44 steps.</p>
+<p><b>Threshold 150,000.</b> Each cycle grows from 18,000 to 150,000 tokens: 44 steps. Average context about 84,000 tokens. Compaction cost per cycle: reading 150,000 tokens ($0.045 cached) and writing 6,000 ($0.09), plus one fresh rebuild of 18,000 ($0.054): about $0.19 per 44 steps.</p>
 <p><b>Threshold 60,000.</b> Cycles of 14 steps, average context about 39,000 tokens. Compaction cost per cycle: \(0.018+0.09+0.054=\$0.16\) per 14 steps, about three times as often per step.</p>
-<p><b>Reads.</b> Cached reads per step: about \$0.025 at the high threshold, \$0.012 at the low one. Over 440 steps: high threshold \(440\times0.025+10\times0.19=\$12.90\); low threshold \(440\times0.012+31\times0.16=\$10.24\).</p>
+<p><b>Reads.</b> Cached reads per step: about $0.025 at the high threshold, $0.012 at the low one. Over 440 steps: high threshold \(440\times0.025+10\times0.19=\$12.90\); low threshold \(440\times0.012+31\times0.16=\$10.24\).</p>
 <p><b>Verdict.</b> The lower threshold is somewhat cheaper and keeps the agent out of the regime where long contexts degrade its decisions, at the price of three times as many summaries, each a chance to lose something. The right setting is found by measuring task success, not by arithmetic alone; the arithmetic shows that cost does not forbid compacting often.</p>
 </div>
 
@@ -140,9 +140,9 @@
 <div class="box example">
 <div class="box-title">Worked example — is delegation worth it?</div>
 <p>A main agent must locate every use of a deprecated API across a repository before planning a migration. Done inline, the search takes 25 steps, each adding 2,400 tokens of results to a context that already holds 40,000 tokens and will be carried for the remaining 150 steps of the run.</p>
-<p><b>Inline.</b> The 60,000 tokens of search results stay in the context (until the next compaction, say 50 steps later): \(60{,}000\times50=3{,}000{,}000\) extra cached token-reads, \$0.90, plus the cost of the 25 steps themselves on a growing context, about \(25\times(40{,}000+30{,}000)=1.75\) million cached tokens, \$0.53.</p>
-<p><b>Delegated.</b> A sub-agent starts with a 6,000-token context (prefix and task), runs the same 25 steps on its own context (\(25\times(6{,}000+30{,}000)=0.9\) million tokens, \$0.27), and returns a 1,500-token list of files and call sites. The main context carries 1,500 tokens for 50 steps (75,000 token-reads, \$0.02).</p>
-<p><b>Verdict.</b> About \$0.29 against \$1.43, and a cleaner main context. The saving comes from not carrying detail that the main agent no longer needs; it is largest for sub-tasks with bulky intermediate results and small final answers.</p>
+<p><b>Inline.</b> The 60,000 tokens of search results stay in the context (until the next compaction, say 50 steps later): \(60{,}000\times50=3{,}000{,}000\) extra cached token-reads, $0.90, plus the cost of the 25 steps themselves on a growing context, about \(25\times(40{,}000+30{,}000)=1.75\) million cached tokens, $0.53.</p>
+<p><b>Delegated.</b> A sub-agent starts with a 6,000-token context (prefix and task), runs the same 25 steps on its own context (\(25\times(6{,}000+30{,}000)=0.9\) million tokens, $0.27), and returns a 1,500-token list of files and call sites. The main context carries 1,500 tokens for 50 steps (75,000 token-reads, $0.02).</p>
+<p><b>Verdict.</b> About $0.29 against $1.43, and a cleaner main context. The saving comes from not carrying detail that the main agent no longer needs; it is largest for sub-tasks with bulky intermediate results and small final answers.</p>
 </div>
 
 <p>When should a long-horizon agent delegate? The worked example points to the criterion: when a sub-task's <em>intermediate</em> results are large and its <em>final</em> result is small, and the sub-task can be specified clearly in a few sentences with explicit criteria for done. Searches, surveys, explorations and attempts at isolated sub-problems fit; tightly coupled work, where each step depends on subtle details of the main state, does not, because the handover would lose exactly those details. Chapter 15 studies delegation in its general form, systems of many agents.</p>
@@ -231,8 +231,8 @@ Setting \(\Omega'(\tau_c)=-C_{\text{ck}}/\tau_c^2+1/(2M_{\text{int}})=0\) gives 
 
 <details class="drill">
 <summary>Drill 14.3 — the budget for an overnight run</summary>
-<p>A run has 12 milestones. Each takes about 25 steps, each step reading an average of 60,000 cached tokens and 3,000 fresh tokens and writing 400 output tokens; each milestone's check costs \$0.20; milestones fail detectably 20% of the time and are retried once. Compaction and checkpoints add 10%. Estimate the budget.</p>
-<p>Per step: \(0.06\times\$0.30+0.003\times\$3+0.0004\times\$15=\$0.018+\$0.009+\$0.006=\$0.033\). Per milestone attempt: \(25\times0.033+0.20=\$1.03\). Expected attempts per milestone \(1+0.2=1.2\): \$1.23. Twelve milestones: \$14.8; plus 10%: about \$16. A budget of \$25 leaves a reserve for unexpected retries; a run that has spent \$12 by milestone 4 is running at three times plan and should alert someone.</p>
+<p>A run has 12 milestones. Each takes about 25 steps, each step reading an average of 60,000 cached tokens and 3,000 fresh tokens and writing 400 output tokens; each milestone's check costs $0.20; milestones fail detectably 20% of the time and are retried once. Compaction and checkpoints add 10%. Estimate the budget.</p>
+<p>Per step: \(0.06\times\$0.30+0.003\times\$3+0.0004\times\$15=\$0.018+\$0.009+\$0.006=\$0.033\). Per milestone attempt: \(25\times0.033+0.20=\$1.03\). Expected attempts per milestone \(1+0.2=1.2\): $1.23. Twelve milestones: $14.8; plus 10%: about $16. A budget of $25 leaves a reserve for unexpected retries; a run that has spent $12 by milestone 4 is running at three times plan and should alert someone.</p>
 </details>
 
 <h3 id="fault-injection">Testing that resumption works</h3>
@@ -244,8 +244,8 @@ Setting \(\Omega'(\tau_c)=-C_{\text{ck}}/\tau_c^2+1/(2M_{\text{int}})=0\) gives 
 
 <div class="box example">
 <div class="box-title">Worked example — where a human's five minutes are best spent</div>
-<p>An overnight run costs \$40 of compute and, if successful, saves two days of an engineer's work. Suppose 20% of runs fail because the task was misunderstood or the plan was wrong from the start, and 15% fail for other reasons later. A five-minute human review of the plan before the run catches 70% of the first kind; a five-minute review at 2 a.m. would catch some later failures but nobody is awake.</p>
-<p><b>Without review.</b> Success 65%; failed runs waste \$40 and a day of calendar time.</p>
+<p>An overnight run costs $40 of compute and, if successful, saves two days of an engineer's work. Suppose 20% of runs fail because the task was misunderstood or the plan was wrong from the start, and 15% fail for other reasons later. A five-minute human review of the plan before the run catches 70% of the first kind; a five-minute review at 2 a.m. would catch some later failures but nobody is awake.</p>
+<p><b>Without review.</b> Success 65%; failed runs waste $40 and a day of calendar time.</p>
 <p><b>With the plan review.</b> Of the 20% of runs with a bad start, 70% (14% of all runs) are corrected before they begin, so 94% of runs reach the later stage, where, as before, \(65/80=81\%\) of them succeed. Success rises to \(0.94\times0.8125\approx76\%\). Expected wasted compute falls from \(0.35\times\$40=\$14\) to \(0.24\times\$40=\$9.60\), and the two-day saving is realised 11 percentage points more often, for five minutes of attention at the moment it is most valuable.</p>
 </div>
 
@@ -360,7 +360,7 @@ Setting \(\Omega'(\tau_c)=-C_{\text{ck}}/\tau_c^2+1/(2M_{\text{int}})=0\) gives 
 <div class="mcq" data-id="ch14-mcq-15" data-topic="§14.5 Worked example">
 <p class="q">In the delegation worked example, the delegated approach cost about what fraction of the inline approach?</p>
 <ol class="opts"><li>The same</li><li>Half</li><li data-correct>About a fifth</li><li>A hundredth</li></ol>
-<div class="explain">\$0.29 against \$1.43.</div>
+<div class="explain">$0.29 against $1.43.</div>
 </div>
 
 <div class="mcq" data-id="ch14-mcq-16" data-topic="§14.6 Milestones">
@@ -444,7 +444,7 @@ Setting \(\Omega'(\tau_c)=-C_{\text{ck}}/\tau_c^2+1/(2M_{\text{int}})=0\) gives 
 <div class="mcq" data-id="ch14-mcq-29" data-topic="§14.3 Cost">
 <p class="q">In the compaction worked example, compacting at a lower threshold:</p>
 <ol class="opts"><li>Was far more expensive</li><li data-correct>Was somewhat cheaper overall and avoided long-context degradation, at the cost of more summaries</li><li>Removed the need for notes</li><li>Broke caching permanently</li></ol>
-<div class="explain">About \$10.24 against \$12.90 over 440 steps.</div>
+<div class="explain">About $10.24 against $12.90 over 440 steps.</div>
 </div>
 
 <div class="mcq" data-id="ch14-mcq-30" data-topic="§14.4 Harness-driven plans">

@@ -88,6 +88,14 @@
 <tr><td>\(a_k\), \(a^*\)</td><td>accuracy after \(k\) revision rounds; its fixed point \(\mu/(\mu+\nu)\) (Ch. 7)</td></tr>
 <tr><td>\(B\)</td><td>reasoning budget in tokens (Ch. 5)</td></tr>
 </tbody></table></div>
+<h2>Training (Part VI)</h2>
+<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>\(m_i\)</td><td>loss mask on token \(i\): 1 if written by the agent, 0 if from the environment (Ch. 17); distinct from \(m\), the number of tasks</td></tr>
+<tr><td>\(\mathcal D_{\text{demo}}\), \(\mathcal D_{\text{pref}}\)</td><td>demonstration and preference datasets (Ch. 17); distinct from the document collection \(\mathcal D\)</td></tr>
+<tr><td>\(\pi^*\), \(\hat\pi\)</td><td>expert policy and learned (cloned) policy (Ch. 17)</td></tr>
+<tr><td>\(\hat r_\theta\), \(\hat\Delta\)</td><td>DPO implicit reward \(\beta\log(\pi_\theta/\pi_{\text{ref}})\) and implicit margin (Ch. 17)</td></tr>
+<tr><td>\(W_0\), \(A\), \(B\), \(d_r\), \(\alpha_{\text{lo}}\), \(d_1,d_2\)</td><td>frozen weight, LoRA factors, LoRA rank, LoRA scale, matrix dimensions (Ch. 17)</td></tr>
+</tbody></table></div>
 <h2>Retrieval and memory</h2>
 <div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
 <tr><td>\(q\)</td><td>a query</td></tr>

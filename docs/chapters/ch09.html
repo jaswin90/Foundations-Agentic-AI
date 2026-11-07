@@ -261,8 +261,8 @@ with typical parameters \(k_1\in[1.2,2]\) (saturation of term frequency) and \(b
 <div class="box example">
 <div class="box-title">Worked example — the policy manual in context or retrieved?</div>
 <p>The airline's full policy library is 200 pages, about 130,000 tokens. A support conversation has 12 turns.</p>
-<p><b>In context, cached across conversations.</b> Each call reads 130,000 cached tokens: \(0.13\times\$0.30=\$0.039\) per turn, \$0.47 per conversation, plus the occasional cache write (\(0.13\times\$3\times1.25\approx\$0.49\)) whenever the cache expires. Latency per turn is fine once cached, but a cold start prefills 130,000 tokens, about 26 s at our reference speed.</p>
-<p><b>Retrieved.</b> Each turn retrieves 5 chunks of 500 tokens (2,500 fresh tokens): \(0.0025\times\$3=\$0.0075\) per turn, \$0.09 per conversation, plus negligible search and reranking cost.</p>
+<p><b>In context, cached across conversations.</b> Each call reads 130,000 cached tokens: \(0.13\times\$0.30=\$0.039\) per turn, $0.47 per conversation, plus the occasional cache write (\(0.13\times\$3\times1.25\approx\$0.49\)) whenever the cache expires. Latency per turn is fine once cached, but a cold start prefills 130,000 tokens, about 26 s at our reference speed.</p>
+<p><b>Retrieved.</b> Each turn retrieves 5 chunks of 500 tokens (2,500 fresh tokens): \(0.0025\times\$3=\$0.0075\) per turn, $0.09 per conversation, plus negligible search and reranking cost.</p>
 <p><b>Quality.</b> Long context: no retrieval misses, but the relevant paragraph is buried among 200 pages of text in the context. Retrieval: about 12% of turns miss the needed chunk (the 0.874 recall of §9.5), but the model's context is focused.</p>
 <p><b>Verdict.</b> Retrieval is five times cheaper and avoids cold-start latency; long context avoids misses. A hybrid, keeping a 10-page summary of the most-used policies cached in the prefix and retrieving the rest, gets most of both. Measure end-to-end accuracy on real conversations to decide.</p>
 </div>
@@ -275,8 +275,8 @@ with typical parameters \(k_1\in[1.2,2]\) (saturation of term frequency) and \(b
 
 <details class="drill">
 <summary>Drill 9.3 — index memory and refresh</summary>
-<p>A research agent's private index holds 20 million web chunks with 768-dimensional embeddings. (a) How much memory do float32 vectors need, and int8? (b) If 2% of chunks change each day and re-embedding costs \$0.02 per million tokens at 400 tokens per chunk, what does the daily refresh cost?</p>
-<p>(a) \(2\times10^7\times768\times4=61.4\) GB; int8: 15.4 GB (plus graph overhead). (b) Changed chunks: 400,000 per day, \(1.6\times10^8\) tokens, about \$3.20 per day in embedding cost, small beside the cost of crawling and serving. Freshness is usually limited by crawling, not embedding.</p>
+<p>A research agent's private index holds 20 million web chunks with 768-dimensional embeddings. (a) How much memory do float32 vectors need, and int8? (b) If 2% of chunks change each day and re-embedding costs $0.02 per million tokens at 400 tokens per chunk, what does the daily refresh cost?</p>
+<p>(a) \(2\times10^7\times768\times4=61.4\) GB; int8: 15.4 GB (plus graph overhead). (b) Changed chunks: 400,000 per day, \(1.6\times10^8\) tokens, about $3.20 per day in embedding cost, small beside the cost of crawling and serving. Freshness is usually limited by crawling, not embedding.</p>
 </details>
 
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>

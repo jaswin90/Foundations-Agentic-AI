@@ -45,7 +45,7 @@
 
 <div class="box bridge">
 <div class="box-title">How to read this book</div>
-<p>Each chapter interleaves theory with worked examples, short <em>drills</em> (numerical problems with hidden solutions: do them with pen and paper first), multiple-choice questions and graded interview questions. Click an MCQ option to see whether you were right and why; reveal an interview answer only after answering out loud, then rate yourself. Your answers are saved in your browser, or across devices if you sign in or use a sync link. Symbols are fixed across the book; the <a href="../notation.html">notation page</a> lists them. Three <strong>running examples</strong> recur: the <em>coding agent</em>, which fixes an issue in a Python repository; the <em>support agent</em>, which serves airline customers under a written policy; and the <em>research agent</em>, which searches the web and writes a cited report. Cost arithmetic uses illustrative prices of \$3 per million input tokens, \$15 per million output tokens and \$0.30 per million cached input tokens.</p>
+<p>Each chapter interleaves theory with worked examples, short <em>drills</em> (numerical problems with hidden solutions: do them with pen and paper first), multiple-choice questions and graded interview questions. Click an MCQ option to see whether you were right and why; reveal an interview answer only after answering out loud, then rate yourself. Your answers are saved in your browser, or across devices if you sign in or use a sync link. Symbols are fixed across the book; the <a href="../notation.html">notation page</a> lists them. Three <strong>running examples</strong> recur: the <em>coding agent</em>, which fixes an issue in a Python repository; the <em>support agent</em>, which serves airline customers under a written policy; and the <em>research agent</em>, which searches the web and writes a cited report. Cost arithmetic uses illustrative prices of $3 per million input tokens, $15 per million output tokens and $0.30 per million cached input tokens.</p>
 </div>
 
 <h2 id="s1-1">1.1 What is an agent?</h2>
@@ -302,14 +302,14 @@
 </div>
 
 <h3 id="cost">Cost and time</h3>
-<p>A model that answers a question makes one call. An agent makes many, and each call reads the whole context, which grows with every step. This makes the cost of an agent episode grow faster than its length, and it is why a technique that is a minor optimisation for chat, <strong>prompt caching</strong>, is essential for agents. When consecutive calls share a long common prefix (the system prompt, the tool definitions and the history so far), a serving system can keep the internal state computed for that prefix and charge much less for re-reading it; at our reference prices, cached input costs \$0.30 per million tokens against \$3 for fresh input. The companion book explains the mechanism (the KV cache and prefix caching); Chapter 4 explains how to arrange a context so that caching works. Here we only compute what it is worth.</p>
+<p>A model that answers a question makes one call. An agent makes many, and each call reads the whole context, which grows with every step. This makes the cost of an agent episode grow faster than its length, and it is why a technique that is a minor optimisation for chat, <strong>prompt caching</strong>, is essential for agents. When consecutive calls share a long common prefix (the system prompt, the tool definitions and the history so far), a serving system can keep the internal state computed for that prefix and charge much less for re-reading it; at our reference prices, cached input costs $0.30 per million tokens against $3 for fresh input. The companion book explains the mechanism (the KV cache and prefix caching); Chapter 4 explains how to arrange a context so that caching works. Here we only compute what it is worth.</p>
 
 <div class="box example">
 <div class="box-title">Worked example — the cost of one coding-agent episode</div>
 <p>The coding agent runs for \(H=40\) steps. The first call's context holds 8,000 tokens (system prompt, tool definitions and the issue). Each step appends about 2,500 tokens: roughly 300 tokens of model output (reasoning and a tool call) plus 2,200 tokens of observation (file contents, test output). So the context at step \(t\) is \(n_t=8{,}000+2{,}500(t-1)\) tokens.</p>
 <p><b>Input tokens.</b> \(\sum_{t=1}^{40}n_t=40\times8{,}000+2{,}500\sum_{t=1}^{40}(t-1)=320{,}000+2{,}500\times780=2{,}270{,}000\). The agent reads 2.27 million tokens to produce \(40\times300=12{,}000\) output tokens: a ratio of almost 190 to 1.</p>
-<p><b>Without caching.</b> \(2.27\,\text{M}\times\$3/\text{M}=\$6.81\) for input plus \(0.012\,\text{M}\times\$15/\text{M}=\$0.18\) for output: <b>\$6.99</b> per episode.</p>
-<p><b>With caching.</b> Only the newly appended tokens are fresh: \(8{,}000+39\times2{,}500=105{,}500\) tokens at \$3/M, or \$0.32. The remaining \(2{,}164{,}500\) tokens are cache reads at \$0.30/M, or \$0.65. With output, the total is <b>\$1.15</b>, six times cheaper. (Real providers may also charge a premium for writing to the cache; Chapter 4 includes it.)</p>
+<p><b>Without caching.</b> \(2.27\,\text{M}\times\$3/\text{M}=\$6.81\) for input plus \(0.012\,\text{M}\times\$15/\text{M}=\$0.18\) for output: <b>$6.99</b> per episode.</p>
+<p><b>With caching.</b> Only the newly appended tokens are fresh: \(8{,}000+39\times2{,}500=105{,}500\) tokens at $3/M, or $0.32. The remaining \(2{,}164{,}500\) tokens are cache reads at $0.30/M, or $0.65. With output, the total is <b>$1.15</b>, six times cheaper. (Real providers may also charge a premium for writing to the cache; Chapter 4 includes it.)</p>
 <p><b>Time.</b> Per step, prefilling the 2,500 fresh tokens takes \(2{,}500/5{,}000=0.5\) s, decoding 300 tokens takes \(300/60=5\) s, and suppose the tool (often running tests) takes 3 s on average. That is 8.5 s per step and \(40\times8.5=340\) s, about <b>6 minutes</b> per episode, of which 59% is the model writing. Decode speed, not reading, dominates the wall clock.</p>
 </div>
 
@@ -318,13 +318,13 @@
 <details class="drill">
 <summary>Drill 1.2 — pass@k for a coding agent</summary>
 <p>A coding agent resolves a particular issue on 30% of attempts. (a) With five independent attempts and the hidden tests as a checker, what is pass@5? (b) What is pass^5? (c) How many attempts are needed for pass@\(k\ge0.95\)?</p>
-<p>(a) \(1-0.7^5=1-0.16807=0.832\). (b) \(0.3^5=0.00243\). (c) Solve \(0.7^k\le0.05\): \(k\ge\ln0.05/\ln0.7=2.996/0.3567=8.4\), so \(k=9\). Note the cost: nine full episodes, at the \$1.15 of the worked example, is about \$10 to be 95% sure of one fix, and only if a reliable checker exists. Chapter 6 develops this into the theory of best-of-\(n\) search with imperfect verifiers.</p>
+<p>(a) \(1-0.7^5=1-0.16807=0.832\). (b) \(0.3^5=0.00243\). (c) Solve \(0.7^k\le0.05\): \(k\ge\ln0.05/\ln0.7=2.996/0.3567=8.4\), so \(k=9\). Note the cost: nine full episodes, at the $1.15 of the worked example, is about $10 to be 95% sure of one fix, and only if a reliable checker exists. Chapter 6 develops this into the theory of best-of-\(n\) search with imperfect verifiers.</p>
 </details>
 
 <details class="drill">
 <summary>Drill 1.3 — the quadratic context</summary>
 <p>A research agent starts with a 3,000-token context and adds 6,000 tokens per step (each fetched page is long). (a) How many input tokens does a 30-step episode read? (b) At what step does the context exceed a 200,000-token window? (c) What does the episode cost without and with caching, ignoring output?</p>
-<p>(a) \(30\times3{,}000+6{,}000\times\frac{30\times29}{2}=90{,}000+2{,}610{,}000=2{,}700{,}000\). (b) \(3{,}000+6{,}000(t-1)>200{,}000\) gives \(t-1>32.8\), so at step 34; a 30-step episode just fits. (c) Uncached: \(2.7\times\$3=\$8.10\). Cached: fresh tokens \(3{,}000+29\times6{,}000=177{,}000\) cost \$0.53, and the remaining \(2{,}523{,}000\) cached tokens cost \$0.76, so about \$1.29. Long observations make research agents expensive; Chapter 9 shows how retrieval and summarisation keep only the relevant parts of each page.</p>
+<p>(a) \(30\times3{,}000+6{,}000\times\frac{30\times29}{2}=90{,}000+2{,}610{,}000=2{,}700{,}000\). (b) \(3{,}000+6{,}000(t-1)>200{,}000\) gives \(t-1>32.8\), so at step 34; a 30-step episode just fits. (c) Uncached: \(2.7\times\$3=\$8.10\). Cached: fresh tokens \(3{,}000+29\times6{,}000=177{,}000\) cost $0.53, and the remaining \(2{,}523{,}000\) cached tokens cost $0.76, so about $1.29. Long observations make research agents expensive; Chapter 9 shows how retrieval and summarisation keep only the relevant parts of each page.</p>
 </details>
 
 <h2 id="s1-11">1.11 Why now, and what remains hard</h2>
@@ -811,9 +811,9 @@
 </details>
 
 <details class="qa" data-id="ch01-qa-07">
-<summary><span class="lvl core">Core</span> Estimate the cost of a 40-step coding-agent episode whose context starts at 8k tokens and grows by 2.5k per step, at \$3/M input, \$15/M output, \$0.30/M cached, 300 output tokens per step.</summary>
+<summary><span class="lvl core">Core</span> Estimate the cost of a 40-step coding-agent episode whose context starts at 8k tokens and grows by 2.5k per step, at $3/M input, $15/M output, $0.30/M cached, 300 output tokens per step.</summary>
 <div class="answer">
-<p>Total input is \(\sum_t n_t = 40\cdot8000 + 2500\cdot\frac{40\cdot39}{2} = 320{,}000+1{,}950{,}000=2.27\)M tokens; output is 12k tokens. Uncached: \(2.27\times3=\$6.81\) plus \(\$0.18\) output, about \$7. With caching, only the 105.5k newly appended tokens are full price (\$0.32); 2.16M cached tokens cost \$0.65; total about \$1.15. The point to make: input dominates by two orders of magnitude, it grows quadratically with the horizon, and caching is worth 6× here. I would also note the cache must be kept warm (calls within the provider's time-to-live) and the prefix must be stable, so tool definitions and system prompt go first and nothing earlier in the context is edited.</p>
+<p>Total input is \(\sum_t n_t = 40\cdot8000 + 2500\cdot\frac{40\cdot39}{2} = 320{,}000+1{,}950{,}000=2.27\)M tokens; output is 12k tokens. Uncached: \(2.27\times3=\$6.81\) plus \(\$0.18\) output, about $7. With caching, only the 105.5k newly appended tokens are full price ($0.32); 2.16M cached tokens cost $0.65; total about $1.15. The point to make: input dominates by two orders of magnitude, it grows quadratically with the horizon, and caching is worth 6× here. I would also note the cache must be kept warm (calls within the provider's time-to-live) and the prefix must be stable, so tool definitions and system prompt go first and nothing earlier in the context is edited.</p>
 </div>
 </details>
 

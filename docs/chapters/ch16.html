@@ -205,8 +205,8 @@
 
 <details class="drill">
 <summary>Drill 16.1 — what replay saves</summary>
-<p>A 60-node research run fails at node 52 because of a bad prompt in the synthesis node. Each node costs on average \$0.04 and 9 seconds. How much does fixing the prompt and re-running cost with and without checkpoint replay?</p>
-<p>Without replay: the whole run again, \(60\times\$0.04=\$2.40\) and 9 minutes, and different searches may yield a different, non-comparable result. With replay from the checkpoint before node 52: 9 nodes, \$0.36 and 81 seconds, on exactly the same inputs, so the effect of the prompt change is isolated. For debugging, the comparability matters more than the saving.</p>
+<p>A 60-node research run fails at node 52 because of a bad prompt in the synthesis node. Each node costs on average $0.04 and 9 seconds. How much does fixing the prompt and re-running cost with and without checkpoint replay?</p>
+<p>Without replay: the whole run again, \(60\times\$0.04=\$2.40\) and 9 minutes, and different searches may yield a different, non-comparable result. With replay from the checkpoint before node 52: 9 nodes, $0.36 and 81 seconds, on exactly the same inputs, so the effect of the prompt change is isolated. For debugging, the comparability matters more than the saving.</p>
 </details>
 
 <h2 id="s16-5">16.5 Frameworks: what they give and what they cost</h2>
@@ -266,7 +266,7 @@
 <p>An email-triage agent receives on average 600 emails an hour, with peaks of three times the mean. Each triage run takes 20 seconds (a classification, a summary, a draft reply for some) and uses about 6,000 input and 400 output tokens.</p>
 <p><b>Concurrency.</b> Mean: \(600/3{,}600\times20=3.3\) runs in flight; peak about 10. Provision 12 workers.</p>
 <p><b>Throughput of tokens.</b> At peak, 1,800 emails an hour, 30 a minute: \(30\times6{,}400=192{,}000\) tokens a minute, which must fit within the provider's rate limits with headroom.</p>
-<p><b>Cost.</b> Per email \(0.006\times\$3+0.0004\times\$15=\$0.024\) on the frontier model; on the small model, \(0.006\times\$0.25+0.0004\times\$1.25=\$0.002\). At 600 an hour around the clock: about \$346 a day on the frontier model, \$29 on the small one, which motivates the per-node model choice of §16.8.</p>
+<p><b>Cost.</b> Per email \(0.006\times\$3+0.0004\times\$15=\$0.024\) on the frontier model; on the small model, \(0.006\times\$0.25+0.0004\times\$1.25=\$0.002\). At 600 an hour around the clock: about $346 a day on the frontier model, $29 on the small one, which motivates the per-node model choice of §16.8.</p>
 </div>
 
 <h2 id="s16-8">16.8 Choosing a model for each node</h2>
@@ -276,7 +276,7 @@
 <details class="drill">
 <summary>Drill 16.4 — per-node models in the support graph</summary>
 <p>Per conversation, the support graph spends tokens as follows: router 3,000 in / 20 out; FAQ or change flow 40,000 in / 1,500 out; policy-explanation node 8,000 in / 300 out. Compute the model cost per conversation with the frontier model everywhere, and with the small model for the router and the flow but the frontier model for the policy node.</p>
-<p>Frontier everywhere: inputs 51,000 tokens (\$0.153), outputs 1,820 (\$0.0273): about \$0.18. Mixed: router and flow on the small model, \(43{,}000\times\$0.25/\text{M}+1{,}520\times\$1.25/\text{M}=\$0.0108+\$0.0019=\$0.0127\); policy node on the frontier model, \(8{,}000\times\$3/\text{M}+300\times\$15/\text{M}=\$0.024+\$0.0045=\$0.0285\); total about \$0.041, a quarter of the original, provided the small model's accuracy on the router and the flow has been verified.</p>
+<p>Frontier everywhere: inputs 51,000 tokens ($0.153), outputs 1,820 ($0.0273): about $0.18. Mixed: router and flow on the small model, \(43{,}000\times\$0.25/\text{M}+1{,}520\times\$1.25/\text{M}=\$0.0108+\$0.0019=\$0.0127\); policy node on the frontier model, \(8{,}000\times\$3/\text{M}+300\times\$15/\text{M}=\$0.024+\$0.0045=\$0.0285\); total about $0.041, a quarter of the original, provided the small model's accuracy on the router and the flow has been verified.</p>
 </details>
 
 <h2 id="s16-9">16.9 Three architectures</h2>

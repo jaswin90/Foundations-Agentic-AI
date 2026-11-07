@@ -132,7 +132,7 @@
 <div class="box-title">Worked example — is self-consistency worth it for an agent step?</div>
 <p>A support agent must classify each request as eligible or ineligible for a refund under a complicated policy before acting; a single chain of thought is right with probability 0.7. Each chain is 400 output tokens on a 10,000-token cached context.</p>
 <p><b>Accuracy.</b> With \(k=5\) chains and majority vote: \(\sum_{j=3}^{5}\binom5j0.7^j0.3^{5-j}=0.3087+0.3602+0.1681=0.837\). With \(k=9\): 0.901 (Figure 5.3).</p>
-<p><b>Cost.</b> One chain: \(0.01\times\$0.30\) cached input \(+\,0.0004\times\$15\) output \(=\$0.003+\$0.006=\$0.009\). Five chains: \$0.045; nine: \$0.081. The extra \$0.036 for \(k=5\) buys 13.7 points of accuracy on the decision.</p>
+<p><b>Cost.</b> One chain: \(0.01\times\$0.30\) cached input \(+\,0.0004\times\$15\) output \(=\$0.003+\$0.006=\$0.009\). Five chains: $0.045; nine: $0.081. The extra $0.036 for \(k=5\) buys 13.7 points of accuracy on the decision.</p>
 <p><b>Latency.</b> The chains can run in parallel, so wall-clock time stays near one chain's \(400/60\approx7\) s, if the provider's rate limits allow parallel requests.</p>
 <p><b>Verdict.</b> If a wrong eligibility decision costs more than about \(\$0.036/0.137\approx\$0.26\) in expectation (an unjustified refund, an escalation, an unhappy customer), voting pays. For high-stakes, low-volume decisions it usually does; for routine steps, a single chain at low temperature or a stronger model is cheaper.</p>
 </div>
@@ -201,7 +201,7 @@
 <details class="drill">
 <summary>Drill 5.2 — the price of a point of accuracy</summary>
 <p>Using Figure 5.5, a step currently uses a 1,000-token reasoning budget (41.6% of problems solved within budget). (a) What does raising the budget to 10,000 tokens buy, and what does it cost per step at the reference output price? (b) How long does the step take?</p>
-<p>(a) Accuracy rises to 73.6%, a gain of 32 points, for 9,000 extra output tokens: \(0.009\times\$15=\$0.135\) more per step, or about 0.42 cents per point. (b) \(10{,}000/60\approx167\) s against 17 s. Whether this is worth it depends on the step: for a decision that would otherwise derail a \$1 episode, yes; for a routine file read, no.</p>
+<p>(a) Accuracy rises to 73.6%, a gain of 32 points, for 9,000 extra output tokens: \(0.009\times\$15=\$0.135\) more per step, or about 0.42 cents per point. (b) \(10{,}000/60\approx167\) s against 17 s. Whether this is worth it depends on the step: for a decision that would otherwise derail a $1 episode, yes; for a routine file read, no.</p>
 </details>
 
 <h2 id="s5-8">5.8 Is the reasoning faithful?</h2>
@@ -245,10 +245,10 @@
 <div class="box example">
 <div class="box-title">Worked example — where to spend thinking in a coding episode</div>
 <p>A 40-step coding episode, worth \(U=\$50\) if successful, has two kinds of step. Four <em>diagnosis</em> steps (localising the bug, choosing a fix) have error rate 0.20 at a 500-token budget and 0.08 at 5,000 tokens; their errors are detected only 30% of the time. Thirty-six <em>routine</em> steps (reading, running tests) have error rate 0.02 whatever the budget, detected 80% of the time.</p>
-<p><b>Expected loss from diagnosis steps.</b> At 500 tokens: \(4\times0.20\times0.7\times\$50=\$28\). At 5,000: \(4\times0.08\times0.7\times\$50=\$11.20\). Saving: \$16.80.</p>
-<p><b>Cost.</b> Extra thinking: \(4\times4{,}500=18{,}000\) output tokens, \$0.27, and \(18{,}000/60=300\) s of extra wall-clock time.</p>
+<p><b>Expected loss from diagnosis steps.</b> At 500 tokens: \(4\times0.20\times0.7\times\$50=\$28\). At 5,000: \(4\times0.08\times0.7\times\$50=\$11.20\). Saving: $16.80.</p>
+<p><b>Cost.</b> Extra thinking: \(4\times4{,}500=18{,}000\) output tokens, $0.27, and \(18{,}000/60=300\) s of extra wall-clock time.</p>
 <p><b>Routine steps.</b> Raising their budget changes nothing (error rate flat) but would cost \(36\times4{,}500\times\$15/\text{M}=\$2.43\) and 45 minutes.</p>
-<p><b>Verdict.</b> Think hard at the four diagnosis steps and briefly elsewhere. A uniform high budget pays the same \$16.80 benefit for ten times the cost and adds three-quarters of an hour. (The expected losses here are first-order approximations; they treat step failures as independent and do not cap total loss at \(U\).)</p>
+<p><b>Verdict.</b> Think hard at the four diagnosis steps and briefly elsewhere. A uniform high budget pays the same $16.80 benefit for ten times the cost and adds three-quarters of an hour. (The expected losses here are first-order approximations; they treat step failures as independent and do not cap total loss at \(U\).)</p>
 </div>
 
 <p>The worked example is the case for adaptive reasoning in agents, and it explains a design that many agents now use: a planning or diagnosis phase with high reasoning effort, followed by an execution phase with low effort, with a return to high effort when an observation contradicts the plan. Some models let the developer set the effort per call; others decide themselves how long to think, which they were trained to do in proportion to apparent difficulty. Either way, the reasoning budget has become one of the main dials of agent design, alongside the model choice and the context, and it is set by the same arithmetic of reliability and cost that runs through the whole book.</p>
@@ -449,8 +449,8 @@
 
 <div class="mcq" data-id="ch05-mcq-29" data-topic="§5.4 Cost">
 <p class="q">Five 400-token chains on a 10k cached context cost (reference prices) about:</p>
-<ol class="opts"><li>\$0.009</li><li data-correct>\$0.045</li><li>\$0.15</li><li>\$0.45</li></ol>
-<div class="explain">Per chain \$0.003 cached input + \$0.006 output = \$0.009; five: \$0.045.</div>
+<ol class="opts"><li>$0.009</li><li data-correct>$0.045</li><li>$0.15</li><li>$0.45</li></ol>
+<div class="explain">Per chain $0.003 cached input + $0.006 output = $0.009; five: $0.045.</div>
 </div>
 
 <div class="mcq" data-id="ch05-mcq-30" data-topic="§5.6 History">
@@ -526,7 +526,7 @@
 
 <details class="qa" data-id="ch05-qa-12">
 <summary><span class="lvl deep">Deep-dive</span> Formalise the optimal reasoning budget for an agent step.</summary>
-<div class="answer"><p>Minimise \(L(B)=U\epsilon(B)(1-r)+\kappa_{\text{out}}B+\lambda_\ell B/v_{\text{dec}}\), where \(\lambda_\ell\) is the value of time. With \(\epsilon\) convex decreasing, the optimum satisfies \(-U(1-r)\epsilon'(B^*)=\kappa_{\text{out}}+\lambda_\ell/v_{\text{dec}}\). If \(\epsilon(B)\approx a-b\log B\) over a range (log-linear scaling), \(\epsilon'=-b/B\), giving \(B^*=U(1-r)b/(\kappa_{\text{out}}+\lambda_\ell/v_{\text{dec}})\): the budget scales linearly with the stakes and the miss probability. With \(U=\$50\), \(1-r=0.7\), \(b=0.05\) per e-fold and \(\kappa_{\text{out}}=1.5\times10^{-5}\) (ignoring time), \(B^*\approx117{,}000\) tokens; including time at \$0.01 per second (\(\lambda_\ell/v_{\text{dec}}\approx1.7\times10^{-4}\) per token) gives about 9,600. Time, not money, often binds.</p></div>
+<div class="answer"><p>Minimise \(L(B)=U\epsilon(B)(1-r)+\kappa_{\text{out}}B+\lambda_\ell B/v_{\text{dec}}\), where \(\lambda_\ell\) is the value of time. With \(\epsilon\) convex decreasing, the optimum satisfies \(-U(1-r)\epsilon'(B^*)=\kappa_{\text{out}}+\lambda_\ell/v_{\text{dec}}\). If \(\epsilon(B)\approx a-b\log B\) over a range (log-linear scaling), \(\epsilon'=-b/B\), giving \(B^*=U(1-r)b/(\kappa_{\text{out}}+\lambda_\ell/v_{\text{dec}})\): the budget scales linearly with the stakes and the miss probability. With \(U=\$50\), \(1-r=0.7\), \(b=0.05\) per e-fold and \(\kappa_{\text{out}}=1.5\times10^{-5}\) (ignoring time), \(B^*\approx117{,}000\) tokens; including time at $0.01 per second (\(\lambda_\ell/v_{\text{dec}}\approx1.7\times10^{-4}\) per token) gives about 9,600. Time, not money, often binds.</p></div>
 </details>
 
 <details class="qa" data-id="ch05-qa-13">

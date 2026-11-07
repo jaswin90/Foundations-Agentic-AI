@@ -135,7 +135,7 @@
 <div class="box-title">Worked example — the cost of connecting everything</div>
 <p>A developer's assistant is connected to 10 servers (code host, issue tracker, CI, two databases, documents, chat, calendar, cloud console, monitoring) averaging 15 tools each, at 300 tokens per definition.</p>
 <p><b>Context.</b> \(150\times300=45{,}000\) tokens of definitions in every call, nearly a quarter of a 200,000-token window, before any task content.</p>
-<p><b>Money.</b> Cached at \$0.30 per million, \$0.0135 per call; over a 40-step episode, \$0.54, plus a cache write of about \$0.17 whenever the cache expires or a server's tool list changes.</p>
+<p><b>Money.</b> Cached at $0.30 per million, $0.0135 per call; over a 40-step episode, $0.54, plus a cache write of about $0.17 whenever the cache expires or a server's tool list changes.</p>
 <p><b>Selection.</b> If a typical request has 15 plausible tools among the 150 with logit margin 4 (§8.8), selection accuracy is \(e^4/(e^4+14)=54.6/68.6=0.80\).</p>
 <p><b>With tool search.</b> Expose 10 core tools plus a <code>search_tools</code> tool that returns the definitions of the 5 most relevant; the context carries about 4,500 tokens of definitions, and with 3 plausible tools among those retrieved and 95% retrieval recall, selection accuracy is \(0.95\times54.6/56.6=0.92\).</p>
 </div>

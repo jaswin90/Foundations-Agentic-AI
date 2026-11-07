@@ -75,7 +75,7 @@
 
 <div class="box bridge">
 <div class="box-title">For the mathematician — tokens and the price of reading</div>
-<p>A tokenizer is a deterministic, invertible map \(\mathrm{tok}:\Sigma^*\to\mathcal V^*\) from character strings to token strings, usually built by byte-pair encoding<span class="cite"><a href="#ref-bpe">[1]</a></span>: start with bytes, repeatedly merge the most frequent adjacent pair into a new symbol, and stop at the target vocabulary size. The map compresses typical text by a factor of three to four relative to bytes. For our cost arithmetic we use the rule of thumb in <code>NOTATION.md</code>: a page of prose is about 500 words, or 650 tokens. A 50-page contract is therefore about 32,500 tokens and costs \(0.0325\times\$3\approx\$0.10\) to read once at our reference input price. An agent that re-reads it at each of twenty steps without caching pays \$1.95; with caching, about \$0.28.</p>
+<p>A tokenizer is a deterministic, invertible map \(\mathrm{tok}:\Sigma^*\to\mathcal V^*\) from character strings to token strings, usually built by byte-pair encoding<span class="cite"><a href="#ref-bpe">[1]</a></span>: start with bytes, repeatedly merge the most frequent adjacent pair into a new symbol, and stop at the target vocabulary size. The map compresses typical text by a factor of three to four relative to bytes. For our cost arithmetic we use the rule of thumb in <code>NOTATION.md</code>: a page of prose is about 500 words, or 650 tokens. A 50-page contract is therefore about 32,500 tokens and costs \(0.0325\times\$3\approx\$0.10\) to read once at our reference input price. An agent that re-reads it at each of twenty steps without caching pays $1.95; with caching, about $0.28.</p>
 </div>
 
 <p>What must a model know to drive this loss down? To predict the next token of a recipe it must know what follows "preheat the oven to"; of a stack trace, which line usually raises a <code>KeyError</code>; of a customer-service transcript, what an agent says after "I'd like a refund". The loss rewards every regularity that makes text predictable, and text is predictable to the extent that it describes a structured world. In the limit, a model that predicted all text perfectly would have to represent the processes that generate it: the facts, the causal structure, the conventions of code and law, and the goals and beliefs of the writers. Real models are far from that limit, but they are far enough along it that probing studies find internal representations of quantities such as board states in game transcripts and the truth or falsehood of statements.</p>
@@ -244,7 +244,7 @@
 <div class="box formula">
 \[ C=\kappa_{\text{in}}n^{\text{new}}+\kappa_{\text{cache}}n^{\text{cached}}+\kappa_{\text{out}}n_{\text{out}},\qquad \ell\approx\ell_{\text{queue}}+\frac{n^{\text{new}}}{v_{\text{pre}}}+\frac{n_{\text{out}}}{v_{\text{dec}}}. \]
 </div>
-<p>Three design consequences follow. <em>Make the model write less</em>: an agent whose steps produce 1,000 tokens of commentary takes \(1{,}000/60\approx17\) s per step and costs \$0.015 per step in output alone; trimming to 200 tokens saves four-fifths of both. Reasoning models complicate this, because their hidden reasoning tokens are output tokens, billed and decoded like any other; a reasoning budget is therefore a latency and cost budget. <em>Make the model read stably</em>: since cached tokens cost a tenth, contexts should be append-only with a fixed prefix, the subject of Chapter 4. <em>Use the cheapest model that suffices</em>: our reference small model costs a twelfth as much per token and decodes two and a half times faster, so routing easy steps to it can cut cost substantially, if a reliable gate decides which steps are easy.</p>
+<p>Three design consequences follow. <em>Make the model write less</em>: an agent whose steps produce 1,000 tokens of commentary takes \(1{,}000/60\approx17\) s per step and costs $0.015 per step in output alone; trimming to 200 tokens saves four-fifths of both. Reasoning models complicate this, because their hidden reasoning tokens are output tokens, billed and decoded like any other; a reasoning budget is therefore a latency and cost budget. <em>Make the model read stably</em>: since cached tokens cost a tenth, contexts should be append-only with a fixed prefix, the subject of Chapter 4. <em>Use the cheapest model that suffices</em>: our reference small model costs a twelfth as much per token and decodes two and a half times faster, so routing easy steps to it can cut cost substantially, if a reliable gate decides which steps are easy.</p>
 
 <div class="box example">
 <div class="box-title">Worked example — a model cascade for the support agent</div>
@@ -275,7 +275,7 @@
 <details class="drill">
 <summary>Drill 3.2 — the cost of thinking</summary>
 <p>A reasoning model spends 2,000 hidden reasoning tokens and 200 visible tokens per agent step, reading 20,000 fresh tokens. Using the reference prices and speeds, what does a step cost and how long does it take? How do the numbers change with a 500-token reasoning budget?</p>
-<p>Output is 2,200 tokens: cost \(0.02\times\$3+0.0022\times\$15=\$0.06+\$0.033=\$0.093\); time \(20{,}000/5{,}000+2{,}200/60=4+36.7=40.7\) s. With a 500-token budget, output is 700 tokens: \$0.0705 and \(4+11.7=15.7\) s. The reasoning budget is mostly a latency lever: it cuts the step time by 61% and its cost by 24%. Whether quality survives must be measured; Chapter 5 shows how accuracy depends on reasoning length.</p>
+<p>Output is 2,200 tokens: cost \(0.02\times\$3+0.0022\times\$15=\$0.06+\$0.033=\$0.093\); time \(20{,}000/5{,}000+2{,}200/60=4+36.7=40.7\) s. With a 500-token budget, output is 700 tokens: $0.0705 and \(4+11.7=15.7\) s. The reasoning budget is mostly a latency lever: it cuts the step time by 61% and its cost by 24%. Whether quality survives must be measured; Chapter 5 shows how accuracy depends on reasoning length.</p>
 </details>
 
 <details class="drill">
@@ -460,8 +460,8 @@
 </div>
 
 <div class="mcq" data-id="ch03-mcq-27" data-topic="§3.7 Cascades">
-<p class="q">A cascade sends all turns to a small model (\$0.002) and escalates 40% to a frontier model (\$0.026). Cost per turn is about:</p>
-<ol class="opts"><li>\$0.0104</li><li data-correct>\$0.0124</li><li>\$0.026</li><li>\$0.028</li></ol>
+<p class="q">A cascade sends all turns to a small model ($0.002) and escalates 40% to a frontier model ($0.026). Cost per turn is about:</p>
+<ol class="opts"><li>$0.0104</li><li data-correct>$0.0124</li><li>$0.026</li><li>$0.028</li></ol>
 <div class="explain">\(0.002+0.4\times0.026=0.0124\).</div>
 </div>
 
@@ -525,7 +525,7 @@
 
 <details class="qa" data-id="ch03-qa-07">
 <summary><span class="lvl core">Core</span> Estimate the cost and latency of an agent step that reads 30k tokens (25k cached) and writes 400 tokens.</summary>
-<div class="answer"><p>Cost: fresh \(5{,}000\times\$3/\text{M}=\$0.015\); cached \(25{,}000\times\$0.30/\text{M}=\$0.0075\); output \(400\times\$15/\text{M}=\$0.006\); total \$0.0285. Latency: prefill of 5,000 fresh tokens at 5,000/s is 1 s; decode of 400 tokens at 60/s is 6.7 s; about 7.7 s plus queueing and tool time. Decode dominates time, fresh input dominates cost here; caching saved \(25{,}000\times\$2.70/\text{M}=\$0.0675\).</p></div>
+<div class="answer"><p>Cost: fresh \(5{,}000\times\$3/\text{M}=\$0.015\); cached \(25{,}000\times\$0.30/\text{M}=\$0.0075\); output \(400\times\$15/\text{M}=\$0.006\); total $0.0285. Latency: prefill of 5,000 fresh tokens at 5,000/s is 1 s; decode of 400 tokens at 60/s is 6.7 s; about 7.7 s plus queueing and tool time. Decode dominates time, fresh input dominates cost here; caching saved \(25{,}000\times\$2.70/\text{M}=\$0.0675\).</p></div>
 </details>
 
 <details class="qa" data-id="ch03-qa-08">

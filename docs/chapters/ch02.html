@@ -283,7 +283,7 @@
 </details>
 
 <h2 id="s2-8">2.8 The cost and latency of an episode</h2>
-<p>Success is not free, and the decision process gives us the language to say what it costs. The cost of an episode is a functional of its trajectory: a sum over steps of the price of the tokens each model call reads and writes, plus the cost of tool calls. Since the trajectory is random, so is the cost, and a system's economics depend on its distribution, not only its mean: an agent whose median episode costs \$1 but whose 1% worst episodes loop for an hour and cost \$40 needs a budget cap, and the cap is itself a stopping rule.</p>
+<p>Success is not free, and the decision process gives us the language to say what it costs. The cost of an episode is a functional of its trajectory: a sum over steps of the price of the tokens each model call reads and writes, plus the cost of tool calls. Since the trajectory is random, so is the cost, and a system's economics depend on its distribution, not only its mean: an agent whose median episode costs $1 but whose 1% worst episodes loop for an hour and cost $40 needs a budget cap, and the cap is itself a stopping rule.</p>
 <p>For step \(t\) with context \(n_t\) tokens, of which \(n^{\text{new}}_t\) are new since the last call, and \(n^{\text{out}}_t\) output tokens, the model charge with caching is</p>
 <div class="box formula">
 \[ C=\sum_{t=1}^{H}\Big[\kappa_{\text{in}}\,n^{\text{new}}_t+\kappa_{\text{cache}}\,(n_t-n^{\text{new}}_t)+\kappa_{\text{out}}\,n^{\text{out}}_t\Big],\qquad \ell=\sum_{t=1}^{H}\Big[\frac{n^{\text{new}}_t}{v_{\text{pre}}}+\frac{n^{\text{out}}_t}{v_{\text{dec}}}+\ell_{\text{tool},t}\Big]. \]
@@ -311,14 +311,14 @@
 <p>A support conversation runs for \(H=12\) agent turns. The fixed prefix (system prompt, airline policy, tool schemas) is 6,000 tokens. Each turn appends 400 tokens: a 100-token customer message, 150 tokens of tool results and the agent's 150-token reply.</p>
 <p><b>Input.</b> \(\sum_t n_t=12\times6{,}000+400\times\frac{12\times11}{2}=72{,}000+26{,}400=98{,}400\) tokens. Output: \(12\times150=1{,}800\) tokens.</p>
 <p><b>Without caching.</b> \(0.0984\times\$3+0.0018\times\$15=\$0.295+\$0.027=\$0.32\).</p>
-<p><b>With caching.</b> Fresh tokens: \(6{,}000+11\times400=10{,}400\), costing \$0.031; cached: \(88{,}000\) tokens, \$0.026; output \$0.027. Total <b>\$0.085</b>, a quarter of the uncached cost. Here the long fixed prefix dominates, so caching it across <em>conversations</em> (the policy and schemas are identical for every customer) saves even more: the first 6,000 tokens are fresh only once per cache lifetime, not once per conversation.</p>
+<p><b>With caching.</b> Fresh tokens: \(6{,}000+11\times400=10{,}400\), costing $0.031; cached: \(88{,}000\) tokens, $0.026; output $0.027. Total <b>$0.085</b>, a quarter of the uncached cost. Here the long fixed prefix dominates, so caching it across <em>conversations</em> (the policy and schemas are identical for every customer) saves even more: the first 6,000 tokens are fresh only once per cache lifetime, not once per conversation.</p>
 <p><b>Latency per turn.</b> Prefill of about 400 fresh tokens takes 0.08 s, decoding 150 tokens 2.5 s, and the tools perhaps 0.5 s: about 3 s per reply, dominated by decoding. Shorter replies are the main latency lever.</p>
 </div>
 
 <details class="drill">
 <summary>Drill 2.3 — when should the agent stop checking?</summary>
-<p>A coding agent believes its fix is correct with probability \(q=0.9\). Running the full test suite costs one step at \$0.05 and, if the fix is wrong, reveals it with probability 0.95, after which the agent repairs it with probability 0.8. Resolving the issue is worth \$50. Should it run the tests?</p>
-<p>The gain in success probability is \((1-q)\times0.95\times0.8=0.1\times0.76=0.076\), worth \(0.076\times\$50=\$3.80\), against a cost of \$0.05 (plus a few more steps to repair, perhaps \$0.20). Run the tests: the threshold \(c/U=0.001\) is far below the gain. Even at \(q=0.99\) the gain is \(0.0076\times\$50=\$0.38\), still worth it. This is why good harnesses make "run the tests before submitting" mandatory.</p>
+<p>A coding agent believes its fix is correct with probability \(q=0.9\). Running the full test suite costs one step at $0.05 and, if the fix is wrong, reveals it with probability 0.95, after which the agent repairs it with probability 0.8. Resolving the issue is worth $50. Should it run the tests?</p>
+<p>The gain in success probability is \((1-q)\times0.95\times0.8=0.1\times0.76=0.076\), worth \(0.076\times\$50=\$3.80\), against a cost of $0.05 (plus a few more steps to repair, perhaps $0.20). Run the tests: the threshold \(c/U=0.001\) is far below the gain. Even at \(q=0.99\) the gain is \(0.0076\times\$50=\$0.38\), still worth it. This is why good harnesses make "run the tests before submitting" mandatory.</p>
 </details>
 
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
@@ -731,7 +731,7 @@
 <details class="qa" data-id="ch02-qa-09">
 <summary><span class="lvl core">Core</span> Compute the cost of a 12-turn support conversation with a 6k-token prefix and 400 tokens appended per turn, 150 output tokens per turn, with and without caching.</summary>
 <div class="answer">
-<p>Input \(=12\times6000+400\times66=98{,}400\) tokens; output 1,800. Uncached: \(0.0984\times3+0.0018\times15\approx\$0.32\). Cached: fresh \(6000+11\times400=10{,}400\) (\$0.031), cached reads 88,000 (\$0.026), output \$0.027, total about \$0.085. Further savings come from caching the shared 6k prefix across conversations. Latency is about 3 s per turn, dominated by decoding the reply.</p>
+<p>Input \(=12\times6000+400\times66=98{,}400\) tokens; output 1,800. Uncached: \(0.0984\times3+0.0018\times15\approx\$0.32\). Cached: fresh \(6000+11\times400=10{,}400\) ($0.031), cached reads 88,000 ($0.026), output $0.027, total about $0.085. Further savings come from caching the shared 6k prefix across conversations. Latency is about 3 s per turn, dominated by decoding the reply.</p>
 </div>
 </details>
 

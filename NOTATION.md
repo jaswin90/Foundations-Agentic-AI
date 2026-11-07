@@ -74,6 +74,15 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(a_k\), \(a^*\) | accuracy after \(k\) revision rounds; its fixed point \(\mu/(\mu+\nu)\) (Ch. 7) |
 | \(B\) | reasoning budget in tokens (Ch. 5) |
 
+## Training (Part VI)
+| Symbol | Meaning |
+|---|---|
+| \(m_i\) | loss mask on token \(i\): 1 if written by the agent, 0 if from the environment (Ch. 17); distinct from \(m\), the number of tasks |
+| \(\mathcal D_{\text{demo}}\), \(\mathcal D_{\text{pref}}\) | demonstration and preference datasets (Ch. 17); distinct from the document collection \(\mathcal D\) |
+| \(\pi^*\), \(\hat\pi\) | expert policy and learned (cloned) policy (Ch. 17) |
+| \(\hat r_\theta\), \(\hat\Delta\) | DPO implicit reward \(\beta\log(\pi_\theta/\pi_{\text{ref}})\) and implicit margin (Ch. 17) |
+| \(W_0\), \(A\), \(B\), \(d_r\), \(\alpha_{\text{lo}}\), \(d_1,d_2\) | frozen weight, LoRA factors, LoRA rank, LoRA scale, matrix dimensions (Ch. 17) |
+
 ## Retrieval and memory
 | Symbol | Meaning |
 |---|---|
