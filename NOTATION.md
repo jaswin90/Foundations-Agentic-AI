@@ -95,6 +95,10 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(b\), \(c\) (Ch. 19) | discordant counts in McNemar's test (only A, only B succeeds) |
 | \(q\) (Ch. 19) | rate at which a judge accepts outputs |
 
+| \(p_{\text{inj}}\), \(N_u\) | probability one untrusted document compromises the agent; untrusted documents read per task (Ch. 20) |
+| \(J\), \(\xi_j\) | number of defence layers; fraction of attacks layer \(j\) lets through (Ch. 20); distinct from the Toolformer threshold \(\xi\) |
+| \(c_m\), \(s_a\) | monitor recall per attack attempt; probability an uncaught attempt succeeds (Ch. 20) |
+
 ## Retrieval and memory
 | Symbol | Meaning |
 |---|---|
