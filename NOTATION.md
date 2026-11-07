@@ -83,6 +83,13 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(\hat r_\theta\), \(\hat\Delta\) | DPO implicit reward \(\beta\log(\pi_\theta/\pi_{\text{ref}})\) and implicit margin (Ch. 17) |
 | \(W_0\), \(A\), \(B\), \(d_r\), \(\alpha_{\text{lo}}\), \(d_1,d_2\) | frozen weight, LoRA factors, LoRA rank, LoRA scale, matrix dimensions (Ch. 17) |
 
+| \(\mathcal X\) | distribution of tasks for training (Ch. 18) |
+| \(V^\pi(x)\), \(V_\psi\) | value (expected return) of policy \(\pi\) from task or prefix \(x\); learned value network (Ch. 18) |
+| \(b(x)\), \(\hat A_i\) | baseline; advantage estimate for token or trajectory \(i\) (Ch. 18); distinct from best-of-\(n\) accuracy \(A(n)\) |
+| \(w_i(\theta)\), \(\epsilon_{\text{clip}}\) | PPO per-token probability ratio; clip range (Ch. 18) |
+| \(\lambda_{\text{gae}}\), \(\delta_t\) | GAE parameter; temporal-difference error (Ch. 18); distinct from arrival rate \(\lambda\) and recovery steps \(\delta\) |
+| \(\Phi(s)\) | shaping potential (Ch. 18) |
+
 ## Retrieval and memory
 | Symbol | Meaning |
 |---|---|

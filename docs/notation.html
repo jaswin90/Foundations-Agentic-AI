@@ -96,6 +96,13 @@
 <tr><td>\(\hat r_\theta\), \(\hat\Delta\)</td><td>DPO implicit reward \(\beta\log(\pi_\theta/\pi_{\text{ref}})\) and implicit margin (Ch. 17)</td></tr>
 <tr><td>\(W_0\), \(A\), \(B\), \(d_r\), \(\alpha_{\text{lo}}\), \(d_1,d_2\)</td><td>frozen weight, LoRA factors, LoRA rank, LoRA scale, matrix dimensions (Ch. 17)</td></tr>
 </tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>\(\mathcal X\)</th><th>distribution of tasks for training (Ch. 18)</th></tr></thead><tbody>
+<tr><td>\(V^\pi(x)\), \(V_\psi\)</td><td>value (expected return) of policy \(\pi\) from task or prefix \(x\); learned value network (Ch. 18)</td></tr>
+<tr><td>\(b(x)\), \(\hat A_i\)</td><td>baseline; advantage estimate for token or trajectory \(i\) (Ch. 18); distinct from best-of-\(n\) accuracy \(A(n)\)</td></tr>
+<tr><td>\(w_i(\theta)\), \(\epsilon_{\text{clip}}\)</td><td>PPO per-token probability ratio; clip range (Ch. 18)</td></tr>
+<tr><td>\(\lambda_{\text{gae}}\), \(\delta_t\)</td><td>GAE parameter; temporal-difference error (Ch. 18); distinct from arrival rate \(\lambda\) and recovery steps \(\delta\)</td></tr>
+<tr><td>\(\Phi(s)\)</td><td>shaping potential (Ch. 18)</td></tr>
+</tbody></table></div>
 <h2>Retrieval and memory</h2>
 <div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
 <tr><td>\(q\)</td><td>a query</td></tr>
