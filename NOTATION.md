@@ -63,6 +63,7 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(r\), \(\delta\) | probability an error is detected; extra steps to recover (Ch. 2) |
 | \(\epsilon_f\) | per-step rate of fatal (undetected) errors (Ch. 14) |
 | \(\varrho\) | correlation (shared-draw probability) among ensemble members (Ch. 15) |
+| \(\rho_s\), \(r_g\) | success probability of a chain stage; fraction of stage failures a gate catches (Ch. 16) |
 | \(f\) (Ch. 15), \(S(n)\) | parallelisable fraction of work; Amdahl speed-up with \(n\) workers |
 | \(\Lambda\) (Ch. 14), \(p_m\), \(r_m\) | steps per milestone; milestone success probability; probability a failed milestone is detected |
 | \(C_{\text{ck}}\), \(M_{\text{int}}\), \(\tau_c\), \(\Omega\) | checkpoint cost; mean time between interruptions; checkpoint interval; overhead fraction (Ch. 14) |
