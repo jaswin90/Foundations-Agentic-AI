@@ -108,4 +108,5 @@ Worked case studies and rubrics.
 | 12 Protocols and Interoperability | ✅ v1 | ≈8,600 | 31 | 17 |
 | 13 Memory Architectures | ✅ v1 | ≈8,900 | 31 | 18 |
 | 14 Long-Horizon Agents | ✅ v1 | ≈8,600 | 31 | 18 |
-| 15–22 | planned | | | |
+| 15 Multi-Agent Systems | ✅ v1 | ≈8,500 | 31 | 17 |
+| 16–22 | planned | | | |

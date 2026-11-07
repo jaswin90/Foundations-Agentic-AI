@@ -23,7 +23,7 @@
     { id: 'ch12', n: 12, part: 'III', title: 'Protocols and Interoperability', sub: 'The Model Context Protocol, agent-to-agent protocols, authorisation', file: 'chapters/ch12.html', ready: true },
     { id: 'ch13', n: 13, part: 'IV', title: 'Memory Architectures', sub: 'Working, episodic, semantic and procedural memory; MemGPT; generative agents', file: 'chapters/ch13.html', ready: true },
     { id: 'ch14', n: 14, part: 'IV', title: 'Long-Horizon Agents', sub: 'Compaction, sub-agents, checkpoints, and tasks that last hours', file: 'chapters/ch14.html', ready: true },
-    { id: 'ch15', n: 15, part: 'V', title: 'Multi-Agent Systems', sub: 'Debate, role-play, orchestrator–worker systems, and when many agents beat one', file: 'chapters/ch15.html', ready: false },
+    { id: 'ch15', n: 15, part: 'V', title: 'Multi-Agent Systems', sub: 'Debate, role-play, orchestrator–worker systems, and when many agents beat one', file: 'chapters/ch15.html', ready: true },
     { id: 'ch16', n: 16, part: 'V', title: 'Agent Architectures and Frameworks', sub: 'Workflows vs agents, the canonical patterns, graphs, durable execution', file: 'chapters/ch16.html', ready: false },
     { id: 'ch17', n: 17, part: 'VI', title: 'Learning from Demonstrations and Preferences', sub: 'Trajectory fine-tuning, RLHF, reward models, DPO', file: 'chapters/ch17.html', ready: false },
     { id: 'ch18', n: 18, part: 'VI', title: 'Reinforcement Learning for Agents', sub: 'Policy gradients, PPO, GRPO, verifiable rewards, multi-turn credit assignment', file: 'chapters/ch18.html', ready: false },
