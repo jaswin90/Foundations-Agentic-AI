@@ -115,4 +115,4 @@ Worked case studies and rubrics.
 | 19 Evaluating Agents | ✅ v1 | ≈9,100 | 32 | 17 |
 | 20 Safety and Security | ✅ v1 | ≈9,400 | 32 | 17 |
 | 21 Agents in Production | ✅ v1 | ≈9,000 | 33 | 17 |
-| 22 | planned | | | |
+| 22 The Agent System Design Interview | ✅ v1 | ≈9,000 | 34 | 18 |

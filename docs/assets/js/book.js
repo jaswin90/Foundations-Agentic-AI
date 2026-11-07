@@ -30,7 +30,7 @@
     { id: 'ch19', n: 19, part: 'VII', title: 'Evaluating Agents', sub: 'Benchmarks, pass@k and pass^k, statistics of small evals, LLM judges', file: 'chapters/ch19.html', ready: true },
     { id: 'ch20', n: 20, part: 'VII', title: 'Safety and Security', sub: 'Prompt injection, sandboxing, permissions, capability control, misalignment', file: 'chapters/ch20.html', ready: true },
     { id: 'ch21', n: 21, part: 'VII', title: 'Agents in Production', sub: 'Cost and latency, observability, guardrails, human oversight', file: 'chapters/ch21.html', ready: true },
-    { id: 'ch22', n: 22, part: 'VII', title: 'The Agent System Design Interview', sub: 'Worked case studies and rubrics', file: 'chapters/ch22.html', ready: false }
+    { id: 'ch22', n: 22, part: 'VII', title: 'The Agent System Design Interview', sub: 'Worked case studies and rubrics', file: 'chapters/ch22.html', ready: true }
   ];
   const PARTS = { I: 'What Is an Agent?', II: 'Reasoning and Planning', III: 'Acting: Tools and Environments', IV: 'Memory and State', V: 'Many Agents', VI: 'Learning to Act', VII: 'Reliability, Safety and Production' };
 

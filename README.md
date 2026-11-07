@@ -4,6 +4,8 @@ A free, interactive, web-native textbook on **agentic AI**: agents as decision p
 
 **Read it:** https://jaswin90.github.io/Foundations-Agentic-AI/
 
+**Status:** all 22 chapters published (v1): about 210,000 words, about 690 MCQs and 370 interview questions, with inline diagrams and charts in every chapter. See `BOOK_SKELETON.md` for per-chapter figures and `REVIEW.md` for the editorial log.
+
 Companion book: [Introduction to LLM Engineering](https://jaswin90.github.io/LLM-Engineering/) (inference and serving). The two books share the same reader engine and, optionally, the same Firebase project for accounts; this book stores its progress under its own `agenticAI` field.
 
 ## Repository layout
