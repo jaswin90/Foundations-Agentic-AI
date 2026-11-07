@@ -114,4 +114,5 @@ Worked case studies and rubrics.
 | 18 Reinforcement Learning for Agents | ✅ v1 | ≈10,400 | 32 | 17 |
 | 19 Evaluating Agents | ✅ v1 | ≈9,100 | 32 | 17 |
 | 20 Safety and Security | ✅ v1 | ≈9,400 | 32 | 17 |
-| 21–22 | planned | | | |
+| 21 Agents in Production | ✅ v1 | ≈9,000 | 33 | 17 |
+| 22 | planned | | | |

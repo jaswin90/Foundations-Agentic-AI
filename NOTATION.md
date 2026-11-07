@@ -99,6 +99,11 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(J\), \(\xi_j\) | number of defence layers; fraction of attacks layer \(j\) lets through (Ch. 20); distinct from the Toolformer threshold \(\xi\) |
 | \(c_m\), \(s_a\) | monitor recall per attack attempt; probability an uncaught attempt succeeds (Ch. 20) |
 
+| \(n_0\), \(\Delta n\), \(n_{\text{out}}\) | fixed prefix tokens; tokens added per turn; output tokens per turn (Ch. 21) |
+| \(N_{\text{in}}(H)\) | total input tokens read over an \(H\)-turn task (Ch. 21) |
+| \(c_s\), \(c_l\), \(a\) | per-request cost of small and large model; cascade acceptance rate (Ch. 21) |
+| \(c\), \(e(c)\), \(C_h\) (Ch. 21) | automation coverage; error rate among automated tasks; cost of a human-handled task |
+
 ## Retrieval and memory
 | Symbol | Meaning |
 |---|---|

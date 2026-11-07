@@ -29,7 +29,7 @@
     { id: 'ch18', n: 18, part: 'VI', title: 'Reinforcement Learning for Agents', sub: 'Policy gradients, PPO, GRPO, verifiable rewards, multi-turn credit assignment', file: 'chapters/ch18.html', ready: true },
     { id: 'ch19', n: 19, part: 'VII', title: 'Evaluating Agents', sub: 'Benchmarks, pass@k and pass^k, statistics of small evals, LLM judges', file: 'chapters/ch19.html', ready: true },
     { id: 'ch20', n: 20, part: 'VII', title: 'Safety and Security', sub: 'Prompt injection, sandboxing, permissions, capability control, misalignment', file: 'chapters/ch20.html', ready: true },
-    { id: 'ch21', n: 21, part: 'VII', title: 'Agents in Production', sub: 'Cost and latency, observability, guardrails, human oversight', file: 'chapters/ch21.html', ready: false },
+    { id: 'ch21', n: 21, part: 'VII', title: 'Agents in Production', sub: 'Cost and latency, observability, guardrails, human oversight', file: 'chapters/ch21.html', ready: true },
     { id: 'ch22', n: 22, part: 'VII', title: 'The Agent System Design Interview', sub: 'Worked case studies and rubrics', file: 'chapters/ch22.html', ready: false }
   ];
   const PARTS = { I: 'What Is an Agent?', II: 'Reasoning and Planning', III: 'Acting: Tools and Environments', IV: 'Memory and State', V: 'Many Agents', VI: 'Learning to Act', VII: 'Reliability, Safety and Production' };
