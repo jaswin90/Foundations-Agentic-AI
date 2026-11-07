@@ -112,4 +112,5 @@ Worked case studies and rubrics.
 | 16 Agent Architectures and Frameworks | ✅ v1 | ≈8,500 | 31 | 18 |
 | 17 Learning from Demonstrations and Preferences | ✅ v1 | ≈11,800 | 32 | 17 |
 | 18 Reinforcement Learning for Agents | ✅ v1 | ≈10,400 | 32 | 17 |
-| 19–22 | planned | | | |
+| 19 Evaluating Agents | ✅ v1 | ≈9,100 | 32 | 17 |
+| 20–22 | planned | | | |

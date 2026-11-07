@@ -90,6 +90,11 @@ Every chapter must use these symbols. If a new symbol is needed, add it here fir
 | \(\lambda_{\text{gae}}\), \(\delta_t\) | GAE parameter; temporal-difference error (Ch. 18); distinct from arrival rate \(\lambda\) and recovery steps \(\delta\) |
 | \(\Phi(s)\) | shaping potential (Ch. 18) |
 
+| \(n\), \(c\) (Ch. 19) | runs per task and successes among them, in pass@\(k\) estimators; elsewhere \(n\) counts tokens |
+| \(\sigma^2_{\text{task}}\), \(\overline{p(1-p)}\) | between-task variance of success probabilities; mean within-task Bernoulli variance (Ch. 19) |
+| \(b\), \(c\) (Ch. 19) | discordant counts in McNemar's test (only A, only B succeeds) |
+| \(q\) (Ch. 19) | rate at which a judge accepts outputs |
+
 ## Retrieval and memory
 | Symbol | Meaning |
 |---|---|

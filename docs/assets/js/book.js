@@ -27,7 +27,7 @@
     { id: 'ch16', n: 16, part: 'V', title: 'Agent Architectures and Frameworks', sub: 'Workflows vs agents, the canonical patterns, graphs, durable execution', file: 'chapters/ch16.html', ready: true },
     { id: 'ch17', n: 17, part: 'VI', title: 'Learning from Demonstrations and Preferences', sub: 'Trajectory fine-tuning, RLHF, reward models, DPO', file: 'chapters/ch17.html', ready: true },
     { id: 'ch18', n: 18, part: 'VI', title: 'Reinforcement Learning for Agents', sub: 'Policy gradients, PPO, GRPO, verifiable rewards, multi-turn credit assignment', file: 'chapters/ch18.html', ready: true },
-    { id: 'ch19', n: 19, part: 'VII', title: 'Evaluating Agents', sub: 'Benchmarks, pass@k and pass^k, statistics of small evals, LLM judges', file: 'chapters/ch19.html', ready: false },
+    { id: 'ch19', n: 19, part: 'VII', title: 'Evaluating Agents', sub: 'Benchmarks, pass@k and pass^k, statistics of small evals, LLM judges', file: 'chapters/ch19.html', ready: true },
     { id: 'ch20', n: 20, part: 'VII', title: 'Safety and Security', sub: 'Prompt injection, sandboxing, permissions, capability control, misalignment', file: 'chapters/ch20.html', ready: false },
     { id: 'ch21', n: 21, part: 'VII', title: 'Agents in Production', sub: 'Cost and latency, observability, guardrails, human oversight', file: 'chapters/ch21.html', ready: false },
     { id: 'ch22', n: 22, part: 'VII', title: 'The Agent System Design Interview', sub: 'Worked case studies and rubrics', file: 'chapters/ch22.html', ready: false }
