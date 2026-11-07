@@ -100,16 +100,16 @@ Worked case studies and rubrics.
 | 4 Context Engineering | ✅ v1 | ≈10,500 | 31 | 16 |
 | 5 Chain of Thought and Test-Time Reasoning | ✅ v1 | ≈10,000 | 31 | 16 |
 | 6 Search and Planning | ✅ v1 | ≈9,000 | 31 | 16 |
-| 7 Reflection, Critique and Self-Correction | ✅ v1 | ≈9,000 | 31 | 17 |
-| 8 Tool Use and Function Calling | ✅ v1 | ≈9,000 | 31 | 16 |
-| 9 Retrieval and Knowledge | ✅ v1 | ≈8,900 | 31 | 16 |
+| 7 Reflection, Critique and Self-Correction | ✅ v1 | ≈9,700 | 32 | 17 |
+| 8 Tool Use and Function Calling | ✅ v1 | ≈9,600 | 32 | 16 |
+| 9 Retrieval and Knowledge | ✅ v1 | ≈9,400 | 32 | 16 |
 | 10 Code as Action | ✅ v1 | ≈9,000 | 31 | 18 |
-| 11 Computer Use and Web Agents | ✅ v1 | ≈8,900 | 31 | 18 |
-| 12 Protocols and Interoperability | ✅ v1 | ≈8,600 | 31 | 17 |
-| 13 Memory Architectures | ✅ v1 | ≈8,900 | 31 | 18 |
-| 14 Long-Horizon Agents | ✅ v1 | ≈8,600 | 31 | 18 |
-| 15 Multi-Agent Systems | ✅ v1 | ≈8,500 | 31 | 17 |
-| 16 Agent Architectures and Frameworks | ✅ v1 | ≈8,500 | 31 | 18 |
+| 11 Computer Use and Web Agents | ✅ v1 | ≈9,200 | 32 | 18 |
+| 12 Protocols and Interoperability | ✅ v1 | ≈9,100 | 32 | 17 |
+| 13 Memory Architectures | ✅ v1 | ≈9,400 | 32 | 18 |
+| 14 Long-Horizon Agents | ✅ v1 | ≈9,100 | 32 | 18 |
+| 15 Multi-Agent Systems | ✅ v1 | ≈9,000 | 32 | 17 |
+| 16 Agent Architectures and Frameworks | ✅ v1 | ≈9,100 | 32 | 18 |
 | 17 Learning from Demonstrations and Preferences | ✅ v1 | ≈11,800 | 32 | 17 |
 | 18 Reinforcement Learning for Agents | ✅ v1 | ≈10,400 | 32 | 17 |
 | 19 Evaluating Agents | ✅ v1 | ≈9,100 | 32 | 17 |

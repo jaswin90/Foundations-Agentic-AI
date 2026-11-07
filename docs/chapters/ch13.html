@@ -254,6 +254,12 @@
 <p>Budget 10,000 tokens; minus 800 for the profile leaves 9,200, or 30 notes. Relevant: \(0.6\times30=18\); irrelevant: 12 notes, 3,600 tokens per call. A reranker that raised precision to 0.85 for the same 18 relevant notes would need only 21 notes, saving about 2,700 tokens per call and reducing distraction.</p>
 </details>
 
+<h2 id="s13-10">13.10 Privacy and user control</h2>
+<p>An agent that remembers is an agent that holds personal data, and memory changes the privacy properties of a system in ways a stateless assistant never had to consider. A user who tells a stateless chatbot about a medical condition has disclosed it for one conversation; a user who tells an agent with memory has, unless the design prevents it, disclosed it to every future conversation, to any sub-agent that reads the memory store, and possibly to anyone who can influence what the agent retrieves. The engineering of memory therefore includes four controls that are as much a part of the design as the retrieval policy.</p>
+<p><strong>Visibility and editing.</strong> Users should be able to see what the agent has stored about them, in plain language, and correct or delete it. This is both a legal requirement in many jurisdictions and a correctness mechanism: users are the best detectors of wrong memories (§13.8). <strong>Consent and scope.</strong> Some information should never be written without asking (health, finances, other people's details), and memories should be scoped: a fact learned in a work context should not surface in a personal one. <strong>Isolation.</strong> Memories must be partitioned by user and tenant at the storage layer, with access enforced by the retrieval service, not by the prompt; a retrieval bug that returns another user's memory is a data breach, whatever the model then does with it. <strong>Retention and deletion.</strong> Memories should expire unless they remain useful, and deletion must propagate.</p>
+<p>Deletion is harder than it looks, because memory systems derive new records from old ones: summaries of episodes, consolidated facts, reflections (§13.4–§13.5). If a user deletes a fact, every derived record that contains it must be found and rewritten or removed. The clean way to guarantee this is <em>lineage</em>: each derived memory records the identifiers of the records it was derived from, so the set of records affected by a deletion is the descendants of the deleted node in a directed acyclic graph, computable by a graph traversal. Without lineage, deletion is best effort, and a consolidated profile may keep repeating a fact the user asked to forget. Embeddings deserve the same treatment: an embedding of a deleted text must be deleted with it, since embeddings can leak information about their source.</p>
+<p>These controls cost little if designed in and a great deal if retrofitted. They also shape what memory is worth building: a feature that stores sensitive facts must earn the privacy obligations it creates, which is one more reason, alongside cost and error, to add memory only where it is measured to help.</p>
+
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
 <p>Memory lets an agent carry knowledge across episodes. A different problem arises within a single episode that is simply too long: a coding task that takes four hours and hundreds of steps, a research project spanning days, a migration of a large code base. Such tasks overflow any context, accumulate errors (§1.8) over hundreds of steps, and outlast the processes, sessions and even machines they run on. How do agents work for hours without losing the thread: how do they compact their context, keep notes, delegate sub-tasks to fresh agents, checkpoint their progress and resume after interruption? And what does the evidence say about how long agents can now work? Chapter 14 takes up long-horizon agents.</p>
 
@@ -267,6 +273,7 @@
 <li>Policies: selective, typed writes; automatic plus agent-directed retrieval within a budget; forgetting by decay, expiry, consolidation and deletion. Unvalidated memory eventually makes an agent worse.</li>
 <li>Failures: staleness, false memories, contamination across scopes, <b>memory poisoning</b> (persistent injection) and cross-user leakage; defences include provenance, confirmation for writes from untrusted content, and storage-level partitioning.</li>
 <li>Evaluate across sessions (LoCoMo, LongMemEval; extraction, multi-session reasoning, temporal reasoning, updates, abstention) and by ablation.</li>
+<li>Memory brings privacy obligations: user visibility and editing, consent and scope, storage-level isolation, retention, and deletion that propagates through derived records via lineage.</li>
 </ul>
 
 <h2 id="mcq">Multiple-choice questions</h2>
@@ -457,6 +464,11 @@
 <p class="q">The most informative evaluation of a memory component is:</p>
 <ol class="opts"><li>Its storage size</li><li data-correct>An ablation: the same agent with and without it on the same multi-session tasks</li><li>Its retrieval latency alone</li><li>The number of memories written</li></ol>
 <div class="explain">Memory that adds tokens and risk without improving outcomes should go.</div>
+</div>
+<div class="mcq" data-id="ch13-mcq-32" data-topic="§13.10 Privacy">
+<p class="q">Why does deleting a memory require lineage tracking?</p>
+<ol class="opts"><li>To speed up retrieval</li><li data-correct>Derived records (summaries, consolidated facts) may contain the deleted fact, and lineage identifies them as descendants to rewrite or remove</li><li>To compress embeddings</li><li>It does not</li></ol>
+<div class="explain">Deletion must propagate through the derivation graph, embeddings included.</div>
 </div>
 </div>
 

@@ -254,6 +254,12 @@
 <p>If independent, all three wrong would happen on \(200\times0.3^3=5.4\) questions; observed 50. In the mixture model, all-wrong occurs with probability \(\varrho\times0.3+(1-\varrho)\times0.027\). Setting this to \(50/200=0.25\): \(0.027+0.273\varrho=0.25\), \(\varrho\approx0.82\). Majority accuracy \(\approx0.82\times0.7+0.18\times0.784=0.574+0.141=0.715\), barely above one agent. Diversify the agents before relying on votes.</p>
 </details>
 
+<h2 id="s15-9">15.9 Debugging a multi-agent system: who failed, and when?</h2>
+<p>When a single agent fails, its trace shows the step that went wrong (§19.8). When a multi-agent system fails, the failure is often distributed: the orchestrator gave an ambiguous instruction, a worker made a reasonable assumption that was wrong, a reviewer passed it, and the final answer was wrong in a way no single message reveals. Attributing failures to agents and steps is the prerequisite for fixing them, and it is harder than it looks. Zhang and colleagues (2025) built a dataset of failed multi-agent runs annotated with the responsible agent and the decisive step, and found that even strong models asked to attribute the failure identified the right agent only about half the time and the decisive step far less often<span class="cite"><a href="#ref-whowhen">[12]</a></span>.</p>
+<p>Three techniques make attribution tractable. <strong>Structured traces</strong>: every message between agents is a span with its sender, recipient, the instruction or result, and links to the context it was produced from, so that the flow of information can be followed rather than reconstructed. <strong>Per-role evaluation</strong>: each role is evaluated on its own inputs and outputs, with role-specific checks (did the planner's sub-tasks cover the question; did each worker answer its sub-task; did the reviewer catch planted errors), which localises regressions to a role. <strong>Counterfactual replay</strong>: re-run the system from a checkpoint with one agent's output replaced by a corrected one (from a person or a stronger model) and see whether the final outcome changes. If replacing the planner's output fixes the run and replacing any worker's does not, the planner was decisive. The idea is the same as the oracle-retriever diagnostic of §9.10, and averaged over many runs it estimates each role's contribution to the failure rate, a crude cousin of a Shapley value.</p>
+<p>Attribution also exposes the cost structure that §15.8 warned about. Multi-agent systems use several times the tokens of a single agent, and traces aggregated by role show where they go: often to workers re-reading the same documents, or to coordination messages that carry little information. A system whose failures are mostly attributable to one role, and whose tokens are mostly spent in another, has two separate improvements available, and only per-role measurement shows them.</p>
+<p>A practical routine follows from this. Keep a small set of failed runs as a standing attribution set, annotated by a person with the responsible role and step. When the system changes, re-run attribution on new failures and compare the distribution across roles with the previous version: a shift in which role is responsible is often the first sign of a regression, visible before the overall success rate moves outside its confidence interval. And when an automated attributor is used to label failures at scale, measure its agreement with the human-annotated set first, exactly as a judge is calibrated in §19.6, since its errors will otherwise be mistaken for changes in the system.</p>
+
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
 <p>This chapter's patterns (orchestrator and workers, producer and checker, pipelines of stages, ensembles) are instances of a small number of architectural building blocks that also appear inside single-agent systems: chains of model calls, routers, parallel branches, loops with evaluators. Practitioners need a vocabulary for these blocks, a way to decide how much autonomy each part of a system should have, and frameworks that implement them as reliable software, with state, retries, persistence and observability. How should an agent system be architected, when is a fixed workflow better than an agent at each point, how are agent graphs built and executed durably, and what do the popular frameworks actually provide? Chapter 16 takes up agent architectures and frameworks.</p>
 
@@ -267,6 +273,7 @@
 <li>Topologies: star \(2(n-1)\) messages per round, chain \(n-1\), fully connected group chat \(O(n^2)\) reads and growing; prefer shared workspaces and structured messages; define termination and conflict rules.</li>
 <li>Failures (MAST): specification, inter-agent misalignment, verification and termination. Tightly coupled, depth-first work suffers inconsistency when split; design interfaces before parallel construction.</li>
 <li>Default to one well-managed agent; use orchestrators for breadth, checkers for verification, diverse ensembles for high-stakes decisions; always compare with the strongest single agent at equal budget.</li>
+<li>Attribute multi-agent failures with structured traces, per-role evaluation and counterfactual replay; automated attribution is still unreliable and must be calibrated against human labels.</li>
 </ul>
 
 <h2 id="mcq">Multiple-choice questions</h2>
@@ -458,6 +465,11 @@
 <ol class="opts"><li>2.25×</li><li data-correct>3.9×</li><li>10×</li><li>54×</li></ol>
 <div class="explain">\(1/(14/54)\approx3.86\).</div>
 </div>
+<div class="mcq" data-id="ch15-mcq-32" data-topic="§15.9 Failure attribution">
+<p class="q">Counterfactual replay attributes a multi-agent failure by:</p>
+<ol class="opts"><li>Asking each agent who failed</li><li data-correct>Re-running from a checkpoint with one agent's output replaced by a corrected one and checking whether the outcome changes</li><li>Counting tokens per agent</li><li>Removing the orchestrator</li></ol>
+<div class="explain">Averaged over runs it estimates each role's contribution to failures.</div>
+</div>
 </div>
 
 <h2 id="interview">Interview questions</h2>
@@ -561,6 +573,7 @@
 <li id="ref-multiresearch">Anthropic. How we built our multi-agent research system. Anthropic engineering blog, June 2025. <a href="https://www.anthropic.com/engineering/multi-agent-research-system">anthropic.com</a>.</li>
 <li id="ref-mast">M. Cemri et al. Why Do Multi-Agent LLM Systems Fail? 2025. <a href="https://arxiv.org/abs/2503.13657">arXiv:2503.13657</a>.</li>
 <li id="ref-cognition">W. Yan. Don't Build Multi-Agents. Cognition blog, June 2025. <a href="https://cognition.ai/blog/dont-build-multi-agents">cognition.ai</a>.</li>
+<li id="ref-whowhen">S. Zhang et al. Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. 2025. <a href="https://arxiv.org/abs/2505.00212">arXiv:2505.00212</a>.</li>
 <li>Further reading: G. M. Amdahl, Validity of the single processor approach to achieving large scale computing capabilities, <em>AFIPS</em>, 1967; M. Wooldridge, <em>An Introduction to MultiAgent Systems</em>, 2nd ed., Wiley, 2009.</li>
 </ol>
 

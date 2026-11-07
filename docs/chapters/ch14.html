@@ -253,6 +253,18 @@ Setting \(\Omega'(\tau_c)=-C_{\text{ck}}/\tau_c^2+1/(2M_{\text{int}})=0\) gives 
 <p>It is worth asking, at the end of this chapter, what actually limits how long agents can work, because the answer shows where progress is coming from. Four limits interact. The first is the <strong>fatal error rate</strong> \(\epsilon_f\): how often a step goes wrong in a way nothing catches. Models trained with reinforcement learning on long, verifiable tasks (§5.6, Chapter 18) have reduced it steadily, both by erring less and by checking their own work more, and this is the main driver of the METR trend of Figure 1.5. The second is <strong>verifiability</strong>: Figure 14.5 showed that milestone checks are what make long tasks feasible, so tasks whose intermediate states can be checked automatically (code with tests, data pipelines with validations) reach much longer horizons than tasks whose quality is judged only at the end (a strategy document, a design). The third is <strong>state management</strong>: an agent that loses the thread after a few compactions is limited by its harness, not its model, and the techniques of §14.3–§14.5 move this limit outward. The fourth is <strong>cost and time</strong>: even with caching, long runs cost dollars to tens of dollars and take hours, so the economic value of the task must justify them, and failures late in a run are expensive.</p>
 <p>The practical consequence for a designer is a ranking of investments. For a task class that should run for hours, first make progress checkable at milestones, since this moves the success curve more than anything else; then externalise state so that runs survive compaction and interruption; then choose the model, preferring one trained for long agentic work; and finally tune costs. The reverse order, starting with the most capable model and hoping it will manage a long unstructured run, is the most common way long-running agents disappoint.</p>
 
+<h2 id="s14-10">14.10 Hierarchical decomposition</h2>
+<p>The techniques of this chapter share an underlying structure: they break a long task into pieces whose errors can be contained. Hierarchical decomposition makes the structure explicit. A goal is split into sub-goals, each of which is either executed directly or split again, until the leaves are tasks short enough to be done reliably. The idea is old in AI (hierarchical task networks in classical planning, options in reinforcement learning), and for language agents it is the natural shape of an orchestrator's plan (§15.4) and of the milestone structure of §14.6.</p>
+<p>The arithmetic shows why it helps and what it requires. A task of \(H\) steps at per-step reliability \(\rho\) succeeds with \(\rho^H\). Split it into \(M\) sub-goals of \(H/M\) steps, each with a check of completion that detects failure, and allow up to \(n_r\) attempts per sub-goal. A sub-goal then succeeds with \(1-(1-\rho^{H/M})^{n_r}\), and the task with that quantity raised to the power \(M\). The expected number of attempts per sub-goal is \(\sum_{j=0}^{n_r-1}(1-\rho^{H/M})^j\), which bounds the extra cost.</p>
+<div class="box example">
+<div class="box-title">Worked example — decomposing a 60-step migration</div>
+<p>A 60-step task at \(\rho=0.98\) succeeds with \(0.98^{60}=29.8\%\) undecomposed.</p>
+<p><b>Six sub-goals of ten steps</b>, each with a reliable completion check and up to three attempts: a sub-goal succeeds first time with \(0.98^{10}=0.817\), within three attempts with \(1-0.183^3=0.994\), and the task with \(0.994^6=96.4\%\).</p>
+<p><b>Cost.</b> Expected attempts per sub-goal \(1+0.183+0.033=1.22\): about 22% more steps buys a jump from 30% to 96%.</p>
+<p><b>The catch.</b> The gain rests on the checks. If a check misses 20% of failed sub-goals, those failures propagate, and the task's success falls back towards the undecomposed value; the decomposition is only as good as its verification at the boundaries.</p>
+</div>
+<p>Decomposition introduces two new failure modes. A <em>bad decomposition</em>, with sub-goals that overlap, leave gaps or depend on each other in ways the plan does not record, produces sub-goals that each succeed while the whole fails; reviewing the plan (by a person or a separate model call) before execution is cheap insurance. And <em>re-planning</em> is needed when a sub-goal turns out to be impossible as specified: the parent must be able to revise the plan rather than retry a doomed sub-goal, which means the hierarchy needs feedback upwards as well as instructions downwards. With both handled, decomposition is the most general tool for turning the \(\rho^H\) law from a ceiling into a design parameter.</p>
+
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
 <p>Part IV gave agents a past (memory) and the stamina for long tasks (compaction, notes, milestones, checkpoints). One technique from this chapter, delegation to sub-agents with their own contexts, points beyond the single agent. If one agent can hand a self-contained piece of work to another, why not build systems of many agents: specialists with different tools, critics that check each other, planners and workers, agents that debate? When do many agents genuinely beat one, what do they cost, how do they communicate and coordinate, and how do their errors compound? Part V begins with multi-agent systems in Chapter 15.</p>
 
@@ -267,6 +279,7 @@ Setting \(\Omega'(\tau_c)=-C_{\text{ck}}/\tau_c^2+1/(2M_{\text{int}})=0\) gives 
 <li><b>Checkpoint</b> every \(\tau_c^*=\sqrt{2C_{\text{ck}}M_{\text{int}}}\) (Young), with overhead \(\sqrt{2C_{\text{ck}}/M_{\text{int}}}\); align milestones with checkpoints. Durable execution replays without re-executing completed side effects.</li>
 <li>Budget runs per milestone with a reserve; stopping early should leave completed milestones usable. The horizon is limited by fatal error rate, verifiability, state management and cost, in roughly that order of leverage.</li>
 <li>Supervise through legible state, check-ins at consequential decisions and automatic early-warning signals; the earliest human looks are worth most.</li>
+<li>Hierarchical decomposition into verified sub-goals with retries turns \(\rho^H\) into \((1-(1-\rho^{H/M})^{n_r})^M\); it is only as good as the completion checks and needs re-planning.</li>
 </ul>
 
 <h2 id="mcq">Multiple-choice questions</h2>
@@ -457,6 +470,11 @@ Setting \(\Omega'(\tau_c)=-C_{\text{ck}}/\tau_c^2+1/(2M_{\text{int}})=0\) gives 
 <p class="q">With milestone success \(p_m\), detection \(r_m\) and one retry, the probability a milestone ends correctly is:</p>
 <ol class="opts"><li>\(p_m\)</li><li data-correct>\(p_m+(1-p_m)r_m p_m\)</li><li>\(p_m r_m\)</li><li>\(1-(1-p_m)^2\)</li></ol>
 <div class="explain">Succeed first time, or fail detectably and succeed on the retry.</div>
+</div>
+<div class="mcq" data-id="ch14-mcq-32" data-topic="§14.10 Decomposition">
+<p class="q">A 60-step task at ρ = 0.98 is split into six verified sub-goals with up to three attempts each. Success rises from about 30% to about:</p>
+<ol class="opts"><li>50%</li><li>82%</li><li data-correct>96%</li><li>100%</li></ol>
+<div class="explain">\((1-0.183^3)^6\approx0.964\), if the completion checks are reliable.</div>
 </div>
 </div>
 

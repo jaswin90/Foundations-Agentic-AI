@@ -257,6 +257,19 @@
 <p>Expected avoidable loss per merge: \(0.005\times5{,}000\times0.7=\$17.50&lt;\$20\): marginal, roughly break-even, and other benefits of review (knowledge sharing, catching non-incident bugs) tip it towards review. At 0.05%: $1.75, so review of every merge is hard to justify on incident cost alone; review by risk (large diffs, sensitive files) instead.</p>
 </details>
 
+<h2 id="s8-10">8.10 Shaping tool outputs</h2>
+<p>Most of the design effort in tool use goes into the call: names, schemas, descriptions. The other half of the interface, what the tool returns, is often left to whatever the underlying system emits: a full JSON record with forty fields, a 20,000-line test log, an HTML page. Yet in an agent the output matters more than the input, for two reasons. It is read by the model, so irrelevant content dilutes attention and can mislead (§4.7 on context rot). And it stays in the context for the rest of the episode, so it is paid for again on every later turn.</p>
+<p>The second reason has a simple arithmetic. An observation of \(n_o\) tokens returned at turn \(t\) of an \(H\)-turn episode is read once at the full input price and then \(H-t\) more times from the cache, so its cost is about \(n_o\big(\kappa_{\text{in}}+(H-t)\kappa_{\text{cache}}\big)\). Early, large observations are the expensive ones. A 20,000-token test log returned at turn 5 of a 40-turn task costs \(20{,}000\times\$3/10^6=\$0.06\) to read and \(20{,}000\times35\times\$0.30/10^6=\$0.21\) to carry, $0.27 in all; trimmed to the 2,000 tokens that contain the failures, it costs $0.027. Across thousands of tasks the difference is the largest single line in the bill, and the trimmed log is also easier for the model to use.</p>
+<p>Good outputs follow a few rules. <strong>Return what the next decision needs</strong>, not everything the system knows: the fields relevant to the task, the failing tests with their assertion messages rather than the whole run, the matching lines of a file with line numbers rather than the file. <strong>Paginate and truncate explicitly</strong>, with a marker saying what was omitted and how to get it ("showing 20 of 312 results; call again with page=2"), so the model knows the view is partial and can ask for more. <strong>Make errors actionable</strong> (§8.7): an error that says which argument was wrong and what values are allowed lets the model repair the call in one step. <strong>Prefer stable, compact formats</strong>: consistent field order and names help the model and the prefix cache; a terse table often carries the same information as verbose JSON in a third of the tokens. And <strong>summarise at the boundary when the raw output is large and the need is narrow</strong>: a sub-call that condenses a long page into the facts relevant to the query moves the cost of reading it out of the main context, which is the sub-agent idea of §14.5 applied to a single tool.</p>
+<div class="box example">
+<div class="box-title">Worked example — trimming the support agent's booking lookup</div>
+<p>The booking API returns a 3,200-token JSON record: passengers, every segment with aircraft and meal codes, fare rules in full, payment history. The support agent calls it at turn 3 of a 20-turn conversation and needs perhaps 400 tokens of it: names, segments, fare class, refundability, status.</p>
+<p><b>Raw.</b> \(3{,}200\times(\$3+17\times\$0.30)/10^6=\$0.026\) per conversation for this one call.</p>
+<p><b>Shaped.</b> A tool wrapper that returns the 400 relevant tokens, with fare rules reduced to "refundable: no; change fee: $75", costs $0.003, and the model no longer has to find the fare rule in a nested structure, which in testing was one of its common errors.</p>
+<p><b>At volume.</b> At 50,000 conversations a month the saving is about $1,130 a month from one tool, and the reduction in misread fare rules is worth more.</p>
+</div>
+<p>Shaping outputs is the cheapest optimisation available to an agent builder: it needs no model change, it reduces cost and latency, and it usually improves accuracy. Traces (§21.5) show which tool outputs are largest and which are read early; those are the first to shape.</p>
+
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
 <p>Information tools have appeared throughout this chapter as the agent's way of knowing what it does not know, and the drill above ended with retrieval as the way to cope with too many tools. Both point to the same capability: finding, in a large collection, the few items relevant to the current need. For the research agent the collection is the web; for the support agent, the policy manual and the help centre; for the coding agent, the repository and its documentation. How do we represent text so that relevance can be computed, how do keyword search and embeddings compare, how should documents be chunked and ranked, and when should an agent retrieve once versus search iteratively? Chapter 9 takes up retrieval and knowledge.</p>
 
@@ -271,6 +284,7 @@
 <li>Retry transient failures with back-off; return permanent ones as informative errors. Retries of non-idempotent writes need <b>idempotency keys</b> or read-backs.</li>
 <li>Selection accuracy falls with plausible alternatives, \(e^\omega/(e^\omega+N-1)\); raise the margin with clear design and lower \(N\) with curation or tool retrieval.</li>
 <li><b>Least privilege</b>: tier tools by risk (auto, logged, approval, unavailable); require approval when \(\epsilon C_{\text{err}}p_{\text{catch}}>C_{\text{appr}}\); treat tool outputs as untrusted input, since injected text can only trigger actions the agent has tools for.</li>
+<li>Shape tool outputs: return what the next decision needs, paginate and truncate explicitly, make errors actionable; an early observation of \(n_o\) tokens costs about \(n_o(\kappa_{\text{in}}+(H-t)\kappa_{\text{cache}})\).</li>
 </ul>
 
 <h2 id="mcq">Multiple-choice questions</h2>
@@ -461,6 +475,11 @@
 <p class="q">Why are interfaces designed for humans, like a raw shell, often poor for models?</p>
 <ol class="opts"><li>Models cannot type</li><li data-correct>Models read every token of output, remember only their context and pay per token, so verbose, unbounded output and multi-step navigation hurt them more</li><li>Shells are slow</li><li>Shells lack JSON</li></ol>
 <div class="explain">Humans skim; models do not.</div>
+</div>
+<div class="mcq" data-id="ch08-mcq-32" data-topic="§8.10 Tool outputs">
+<p class="q">Why are large tool outputs returned early in an episode especially costly?</p>
+<ol class="opts"><li>They are priced at the output rate</li><li data-correct>They are re-read from the context on every later turn, so their cost grows with the remaining turns</li><li>They disable caching</li><li>They are never cached</li></ol>
+<div class="explain">Cost ≈ \(n_o(\kappa_{\text{in}}+(H-t)\kappa_{\text{cache}})\).</div>
 </div>
 </div>
 

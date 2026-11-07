@@ -257,6 +257,11 @@
 <p>Request <code>repo:read</code>, <code>branch:create</code> and <code>pr:write</code>, plus write access limited to branches the agent creates if the server supports it. Avoid <code>repo:write</code> if it allows pushing to the default branch, and never request <code>admin</code> or <code>issues:write</code> (not needed). Residual risk: the agent can still open misleading pull requests or push harmful code to its own branch, which is why merges require human review (Drill 8.4) and branch protection on the default branch should be enforced by the server, not the agent.</p>
 </details>
 
+<h2 id="s12-9">12.9 Evolving and testing a server</h2>
+<p>A server's tools are an interface to models, and interfaces change. A conventional API can add a field without breaking its clients, because client code ignores what it does not read. A tool server is different: every change to a tool's name, description or schema changes the prompt that every connected agent sees, and therefore can change behaviour, even when the change is "backwards compatible" in the usual sense. A clarified description can make a model call a tool more often; a new optional parameter can make it start passing values it invents; renaming a tool can make a model that had learned the old name stop using it.</p>
+<p>Three practices follow. <strong>Version deliberately.</strong> Treat descriptions and schemas as versioned artefacts, publish a changelog, distinguish additive changes from breaking ones (removed tools, renamed or retyped parameters, changed semantics), and keep a deprecation window in which old and new forms coexist. Clients that pin tool definitions (§12.5, as a defence against definition changes after approval) need a way to review and accept updates, which a changelog makes possible. <strong>Test with models, not only with code.</strong> Unit tests check that a tool does what its schema says; they cannot check that models use it correctly. A server should ship with a small evaluation suite: tasks that require its tools, run against the models its users are likely to use, measuring whether the right tool is chosen, whether arguments are valid, and whether the task succeeds, with the statistics of §19.4. Re-running the suite on every change to descriptions catches regressions that no unit test would. Interactive debugging tools such as the MCP Inspector, published alongside the protocol, help during development by showing exactly what a client sees and letting a developer call tools by hand. <strong>Watch usage.</strong> Logs of which tools are called, with which argument patterns and error rates, show where models misunderstand a tool; a tool that returns many validation errors needs a better description or a simpler schema (§8.5).</p>
+<p>The economics favour care. A popular server may be connected to thousands of agents built by other people, whose evaluations it cannot see. A description change that lowers correct-tool selection by two points across all of them is a regression no one notices for weeks. Treating the server's prompts with the same release discipline as an agent's own (§21.8) is the only protection.</p>
+
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
 <p>Part III has given the agent its means of acting: tools and their design, retrieval, code, computer use and the protocols that connect them. Each enlarges what an agent can observe and do, and each pours more into the one place where the agent holds everything it knows: its context. A coding agent that has read forty files, a research agent that has fetched a hundred pages, a support agent in its fourth conversation with the same customer, all run into the same wall: the context is finite, expensive and forgetful, and it ends with the episode. How should an agent remember? What should it keep within an episode, what should it carry across episodes, how should memories be stored, retrieved and kept accurate, and what can be learned from psychology's division of memory into working, episodic, semantic and procedural kinds? Part IV begins with memory architectures in Chapter 13.</p>
 
@@ -269,6 +274,7 @@
 <li><b>Threats</b>: tool poisoning, definition changes after approval, cross-server shadowing, injection via outputs; exposure grows as \(1-(1-q)^n\). Avoid the <b>lethal trifecta</b> (private data + untrusted content + external communication) in any one context.</li>
 <li><b>A2A</b> (April 2025) connects opaque, long-running, stateful agents through agent cards, tasks with lifecycles, messages and artifacts. Expose short deterministic operations as tools and judgement-heavy, multi-step work as agents.</li>
 <li>Conventions: repository instruction files, packaged skills loaded on demand, OpenAPI-generated tools. Good servers have task-shaped, discriminable tools, bounded outputs, honest effect annotations, per-user authorisation and deliberate versioning.</li>
+<li>Server tool descriptions are prompts: version them, keep deprecation windows, test changes with model-based evaluation suites, and watch usage for misunderstood tools.</li>
 </ul>
 
 <h2 id="mcq">Multiple-choice questions</h2>
@@ -459,6 +465,11 @@
 <p class="q">A ticket server acting for many users' agents should authorise each request against:</p>
 <ol class="opts"><li>Its own service account</li><li data-correct>The end user's permissions</li><li>The model's confidence</li><li>The client's IP address only</li></ol>
 <div class="explain">Otherwise it becomes a confused deputy.</div>
+</div>
+<div class="mcq" data-id="ch12-mcq-32" data-topic="§12.9 Evolving servers">
+<p class="q">Why can a "backwards-compatible" change to a tool's description still break agents?</p>
+<ol class="opts"><li>It changes the transport</li><li data-correct>Descriptions are part of every connected model's prompt, so changing them can change model behaviour</li><li>It invalidates credentials</li><li>Schemas cannot change</li></ol>
+<div class="explain">Test servers with model-based evaluation suites, not only unit tests.</div>
 </div>
 </div>
 

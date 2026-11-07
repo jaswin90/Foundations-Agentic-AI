@@ -244,6 +244,12 @@
 <p>A: \(20\times3{,}000+20\times6{,}000+150\times210=60{,}000+120{,}000+31{,}500=211{,}500\). B: \(60{,}000+1{,}400\times57+31{,}500=171{,}300\). C: \(60{,}000+20\times7{,}400+31{,}500=239{,}500\). B is cheapest; C costs about 40% more than B but gives both semantic handles and visual context, which often pays for itself in fewer errors. Measure success, not only tokens.</p>
 </details>
 
+<h2 id="s11-9">11.9 Training models to use computers</h2>
+<p>General-purpose models were not trained to operate interfaces, and in 2023 their weakest skill was grounding: given a screenshot and an instruction, they could describe what to do but not where to click (§11.4). Progress since has come mostly from training data designed for the problem, in three layers.</p>
+<p><strong>Grounding data</strong> pairs screenshots with referring expressions and coordinates: "the Save button" with its bounding box. It can be harvested at scale from rendered web pages, where the HTML gives every element's text and position for free, and from mobile and desktop accessibility trees. SeeClick (Cheng and colleagues, 2024) pre-trained a vision-language model on such data and introduced ScreenSpot, a benchmark of grounding across web, desktop and mobile, showing that better grounding translated directly into better agent success<span class="cite"><a href="#ref-seeclick">[6]</a></span>. <strong>Trajectory data</strong> records sequences of observations and actions that complete tasks, from people (expensive, slow, but natural) or from models exploring environments and keeping the trajectories a checker accepts, the rejection sampling of §17.3. <strong>Reflection and recovery data</strong> teaches what to do after a mistake: trajectories in which an error is made and then noticed and corrected, which plain demonstrations rarely contain and which, as §17.2 showed, matter most for long horizons.</p>
+<p>UI-TARS (Qin and colleagues at ByteDance, 2025) combined all three in a native GUI agent model, trained end to end on large-scale screenshot data for perception and grounding, on action traces in a unified action space across platforms, and on reflective traces including corrections, and then improved with iterative training on trajectories collected in many virtual machines<span class="cite"><a href="#ref-uitars">[10]</a></span>. The same period saw frontier models from several developers add computer use as a trained capability. The general lesson repeats Part VI: once a capability has a verifiable environment (a virtual machine with a checker), it can be trained with the policy's own experience, and progress follows the availability of environments and checks.</p>
+<p>Two cautions apply to training data for interfaces. Interfaces change, so models trained on last year's layouts can mis-ground on this year's, and evaluation should include recently changed applications. And trajectories collected on real accounts carry personal data and can include injected content from the pages visited, so data pipelines need the same redaction and filtering as production traces (§21.5, §20.2).</p>
+
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
 <p>The chapter's last section argued that the best interface for an agent is a programmatic one. But each tool in Chapter 8 was integrated by hand: someone wrote its schema, its description and the code that calls it, for one agent framework. As agents multiply and the systems they must reach number in the thousands, integrating every tool with every agent separately becomes the bottleneck. Is there a standard way for any agent to discover and use any tool, data source or other agent? How are such connections authorised, so that an agent acts with the user's permissions and no more? Chapter 12 examines the protocols that emerged in 2024–2025 to answer these questions.</p>
 
@@ -257,6 +263,7 @@
 <li>Verify each consequential action's effect on screen; recovery turns 49% success into 86% in the worked example.</li>
 <li>Safety: dedicated sandboxed environments, minimal credentials, confirmation before consequential actions, monitoring for injection, read-only where possible.</li>
 <li>Use APIs by default and a sandboxed computer-use sub-agent as a fallback.</li>
+<li>Computer-use skill comes from training data: grounding pairs harvested from rendered pages, trajectories filtered by checkers, and reflection data showing recovery (SeeClick, UI-TARS).</li>
 </ul>
 
 <h2 id="mcq">Multiple-choice questions</h2>
@@ -448,6 +455,11 @@
 <ol class="opts"><li>Never noticed them</li><li data-correct>Often began to follow them, even when they did not complete the attacker's goal</li><li>Always completed the attacker's goal</li><li>Were immune</li></ol>
 <div class="explain">Partial compliance is already a risk; defences must not rely on the model alone.</div>
 </div>
+<div class="mcq" data-id="ch11-mcq-32" data-topic="§11.9 Training">
+<p class="q">Why can grounding data for GUI agents be collected at scale cheaply from web pages?</p>
+<ol class="opts"><li>Web pages have no images</li><li data-correct>The rendered HTML gives every element's text and position, providing labels for free</li><li>Users label them</li><li>Browsers record clicks</li></ol>
+<div class="explain">Accessibility trees do the same for mobile and desktop.</div>
+</div>
 </div>
 
 <h2 id="interview">Interview questions</h2>
@@ -554,6 +566,7 @@
 <li id="ref-som">J. Yang et al. Set-of-Mark Prompting Unleashes Extraordinary Visual Grounding in GPT-4V. 2023. <a href="https://arxiv.org/abs/2310.11441">arXiv:2310.11441</a>.</li>
 <li id="ref-androidworld">C. Rawles et al. AndroidWorld: A Dynamic Benchmarking Environment for Autonomous Agents. <em>ICLR</em>, 2025. <a href="https://arxiv.org/abs/2405.14573">arXiv:2405.14573</a>.</li>
 <li id="ref-wasp">I. Evtimov et al. WASP: Benchmarking Web Agent Security Against Prompt Injection Attacks. 2025. <a href="https://arxiv.org/abs/2504.18575">arXiv:2504.18575</a>.</li>
+<li id="ref-uitars">Y. Qin et al. UI-TARS: Pioneering Automated GUI Interaction with Native Agents. 2025. <a href="https://arxiv.org/abs/2501.12326">arXiv:2501.12326</a>.</li>
 <li>Further reading: Anthropic, Introducing computer use (October 2024); OpenAI, Computer-Using Agent (January 2025); J. Y. Koh et al., VisualWebArena, <a href="https://arxiv.org/abs/2401.13649">arXiv:2401.13649</a>; B. Gou et al., Navigating the Digital World as Humans Do: Universal Visual Grounding for GUI Agents (UGround), <a href="https://arxiv.org/abs/2410.05243">arXiv:2410.05243</a>.</li>
 </ol>
 

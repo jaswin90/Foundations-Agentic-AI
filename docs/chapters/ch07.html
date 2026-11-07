@@ -249,6 +249,19 @@
 <p>With draft: flagged wrong \(2\times0.05=0.1\), fixed 0.08; flagged right \(8\times0.01=0.08\), broken 0.04. Wrong after: \(2-0.08+0.04=1.96\). Without draft: flagged wrong \(2\times0.6=1.2\), fixed 0.96; flagged right \(8\times0.05=0.4\), broken 0.2. Wrong after: \(2-0.96+0.2=1.24\). Independence turns a useless check into one that removes over a third of the errors.</p>
 </details>
 
+<h2 id="s7-9">7.9 Self-generated tests and self-verification</h2>
+<p>External feedback (§7.5) is the most reliable signal for revision, but many tasks arrive without it: a coding request with no test suite, a data transformation with no expected output. A natural move is to have the model generate the missing checks itself, writing tests before or alongside the solution and then using them as the verifier. The idea sounds circular, and partly it is, but it works better than intrinsic self-critique for a precise reason: executing a test is not the model's opinion. Once written, a test is checked by the interpreter, so the model's judgement enters only through which tests it writes, not through whether they pass.</p>
+<p>CodeT (Chen and colleagues at Microsoft, 2022) turned this into a selection method<span class="cite"><a href="#ref-codet">[13]</a></span>. Sample many candidate programs and many candidate tests from the same model, run every program against every test, and score each program by <em>dual agreement</em>: how many tests it passes, weighted by how many other programs pass the same set of tests. Correct programs tend to agree with each other and with correct tests; wrong programs fail in scattered, idiosyncratic ways. On HumanEval, selecting by dual agreement raised the pass@1 of a code model from 47.0% to 65.8%, without any reference tests. The same principle appears in agents that write a reproduction test before fixing a bug (§10.5): the test turns a vague issue into an executable target.</p>
+<p>The weakness is correlation. Tests and solutions come from the same model, so they can share a misconception: if the model misreads the specification, it writes a wrong solution and a test that confirms it. In the language of §6.2, self-generated tests have a false-positive rate that is not independent of the generator's error. A simple model makes the point. Suppose a solution is wrong with probability \(1-p\), and a self-generated test catches a wrong solution with probability \(r\) when the error is idiosyncratic but only \(r'\ll r\) when it comes from a misreading the test shares. If a fraction \(\phi\) of errors are misreadings, the probability that a wrong solution survives one test is \(1-[(1-\phi)r+\phi r']\), and no number of additional tests from the same model removes the \(\phi\) component. Diversity is the remedy: tests written from the specification before the solution is seen, tests from a different model or a differently prompted one, property-based tests that check invariants rather than specific outputs, and, where they exist, a few tests written by people.</p>
+<div class="box example">
+<div class="box-title">Worked example — how much do self-written tests catch?</div>
+<p>A coding agent's first solutions are wrong 40% of the time. Of those errors, 70% are idiosyncratic slips, which each self-written test catches with probability 0.5, and 30% are misreadings of the specification, which a self-written test catches with probability 0.05.</p>
+<p><b>One test.</b> A wrong solution is caught with probability \(0.7\times0.5+0.3\times0.05=0.365\).</p>
+<p><b>Five independent-looking tests.</b> Slips survive with \(0.5^5=0.031\), misreadings with \(0.95^5=0.774\). A wrong solution survives with probability \(0.7\times0.031+0.3\times0.774=0.254\), so 10.2% of all solutions are wrong but pass, against 40% before.</p>
+<p><b>The floor.</b> Misreadings are \(0.4\times0.3=12\%\) of all solutions, and five tests still let 77% of them through (9.3% of all solutions), while slips now contribute only 0.9%. More tests from the same model barely move the first term; tests derived from the specification by a separate call attack it directly.</p>
+</div>
+<p>Self-verification is therefore best seen as a way to convert some of a model's knowledge into executable form, where it can be checked mechanically, rather than as a replacement for external feedback. It catches slips cheaply and misses shared misconceptions, so it should be paired with checks that do not share the generator's view of the problem.</p>
+
 <h2 id="looking-ahead" class="unnumbered">Looking ahead</h2>
 <p>Part II has shown how an agent can decide better: by reasoning before acting (Chapter 5), by searching over alternatives with an evaluator (Chapter 6), and by revising with feedback (this chapter). A single lesson runs through all three: the most valuable information comes from outside the model, from executing code, running tests, querying databases and searching the web. Every one of these is a tool, and so far we have treated tools as given. But tools are where an agent's capability and its risk both live: what tools should an agent have, how are they described and called, how do models learn to use them, how should their outputs be shaped, and what happens when a call fails? Part III begins with the mechanics of tool use and function calling in Chapter 8.</p>
 
@@ -261,6 +274,7 @@
 <li><b>Reflexion</b> learns across attempts by storing verbal lessons in episodic memory: strong on repeatable tasks with reliable evaluators; limited by wrong lessons, context cost and non-repeatable tasks.</li>
 <li><b>Trained critics</b> (CriticGPT) and reasoning verifiers can beat self-review; <b>LLM judges</b> have position, verbosity and self-preference biases, which optimisation amplifies. Calibrate judges against human labels.</li>
 <li>Build evaluator–optimizer loops with tiered feedback (deterministic → tool-grounded → critic → human), revise only on specific flags, protect what passes, bound rounds, and measure \(\mu\) and \(\nu\).</li>
+<li>Self-generated tests (CodeT-style dual agreement) turn the model's knowledge into executable checks; they catch slips but share the generator's misreadings, so pair them with independent checks.</li>
 </ul>
 
 <h2 id="mcq">Multiple-choice questions</h2>
@@ -452,6 +466,11 @@
 <ol class="opts"><li>The model became more careful</li><li data-correct>Claims were changed only if the fetched page failed to support them</li><li>Fewer claims were written</li><li>The temperature was lowered</li></ol>
 <div class="explain">A supported claim passes the check and is protected.</div>
 </div>
+<div class="mcq" data-id="ch07-mcq-32" data-topic="§7.9 Self-generated tests">
+<p class="q">Why can tests written by the same model fail to catch its errors, however many are written?</p>
+<ol class="opts"><li>Tests are too slow</li><li data-correct>Tests and solutions can share the same misreading of the specification, so their errors are correlated</li><li>Interpreters are unreliable</li><li>Tests always pass</li></ol>
+<div class="explain">The shared-misconception term does not shrink with more tests from the same source.</div>
+</div>
 </div>
 
 <h2 id="interview">Interview questions</h2>
@@ -556,6 +575,7 @@
 <li id="ref-saunders">W. Saunders et al. Self-critiquing models for assisting human evaluators. 2022. <a href="https://arxiv.org/abs/2206.05802">arXiv:2206.05802</a>.</li>
 <li id="ref-bea">E. Schluntz and B. Zhang. Building Effective Agents. Anthropic, 2024. <a href="https://www.anthropic.com/research/building-effective-agents">anthropic.com</a>.</li>
 <li id="ref-score">A. Kumar et al. Training Language Models to Self-Correct via Reinforcement Learning. 2024. <a href="https://arxiv.org/abs/2409.12917">arXiv:2409.12917</a>.</li>
+<li id="ref-codet">B. Chen, F. Zhang, A. Nguyen, D. Zan, Z. Lin, J.-G. Lou and W. Chen. CodeT: Code Generation with Generated Tests. 2022. <a href="https://arxiv.org/abs/2207.10397">arXiv:2207.10397</a>.</li>
 <li>Further reading: L. Zhang et al., Generative Verifiers: Reward Modeling as Next-Token Prediction, <a href="https://arxiv.org/abs/2408.15240">arXiv:2408.15240</a>.</li>
 </ol>
 
